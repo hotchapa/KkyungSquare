@@ -102,7 +102,7 @@ jobs:
             cd /home/ubuntu/project
 
             # GitHub Actions 워크플로우에서 복제한 코드를 사용하여 프로젝트 디렉토리에 복사
-            cp -r $GITHUB_WORKSPACE/back/* .
+            docker pull hotchapa/burger-nest:latest
 
             # Docker Compose 실행
             docker-compose up -d --remove-orphans
