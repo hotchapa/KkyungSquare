@@ -74,16 +74,19 @@ jobs:
               sudo systemctl enable docker
             fi
 
-            if ! command -v docker-compose &> /dev/null
+              if ! command -v docker-compose &> /dev/null
             then
               echo "Docker Compose not found, installing..."
               sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
               sudo chmod +x /usr/local/bin/docker-compose
             fi
 
+            sudo usermod -aG docker $USER
+            newgrp docker
+
             docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
             docker pull hotchapa/burger-nest:latest
-            docker-compose -f /path/to/your/docker-compose.yml up -d
+            docker-compose -f /home/ubuntu/project/back/docker-compose.yml up -d
           EOF
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
