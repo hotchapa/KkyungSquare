@@ -55,17 +55,26 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-2
 
+      - name: Get GitHub Actions runner IP
+        id: ip
+        run: |
+          echo "ipv4=$(curl -s https://checkip.amazonaws.com)" >> $GITHUB_ENV
+
+      - name: Add GitHub Actions IP to Security group
+        run: |
+          aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ env.ipv4 }}/32
+
       - name: Set up SSH key
         run: |
           echo "${{ secrets.EC2_KEY }}" > private_key.pem
-          chmod 600 private_key.pem
+          chmod 400 private_key.pem
 
       - name: Deploy to EC2
         run: |
           public_ip=${{ secrets.EC2_PUBLIC_IP }}
           echo "Public IP: $public_ip"
           ssh -o StrictHostKeyChecking=no -i private_key.pem -T ubuntu@$public_ip << 'EOF'
-          if ! command -v docker &> /dev/null
+            if ! command -v docker &> /dev/null
             then
               echo "Docker not found, installing..."
               sudo apt-get update
@@ -74,7 +83,7 @@ jobs:
               sudo systemctl enable docker
             fi
 
-              if ! command -v docker-compose &> /dev/null
+            if ! command -v docker-compose &> /dev/null
             then
               echo "Docker Compose not found, installing..."
               sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -84,8 +93,8 @@ jobs:
             sudo usermod -aG docker $USER
             newgrp docker
 
-            docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
-            docker pull hotchapa/burger-nest:latest
+            echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
+            sudo systemctl restart docker
             docker-compose -f /home/ubuntu/project/back/docker-compose.yml up -d
           EOF
         env:
@@ -96,4 +105,3 @@ jobs:
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
           MYSQL_USER: ${{ secrets.MYSQL_USER }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
-# test
