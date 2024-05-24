@@ -96,7 +96,8 @@ jobs:
             sudo systemctl restart docker
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull hotchapa/burger-nest:latest
-            docker-compose -f /home/ubuntu/project/back/docker-compose.yml up -d
+            cd /home/ubuntu/project/back
+            docker-compose up -d --remove-orphans
             docker image prune -f
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
