@@ -92,12 +92,12 @@ jobs:
 
             sudo usermod -aG docker $USER
             newgrp docker
-
             echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
             sudo systemctl restart docker
-            docker pull hotchapa/burger-nest:latest
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull hotchapa/burger-nest:latest
             docker-compose -f /home/ubuntu/project/back/docker-compose.yml up -d
-          EOF
+            docker image prune -f
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
