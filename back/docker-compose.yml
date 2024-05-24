@@ -15,8 +15,8 @@ services:
       - mysql-data:/var/lib/mysql
 
   nest:
-    image: hotchapa/nest-backend:latest #내 도커 허브 이미지 주소
-    container_name: nest-backend
+    image: hotchapa/burger-nest:latest #내 도커 허브 이미지 주소
+    container_name: burger-nest
     ports:
       - "3000:3000"
     depends_on:

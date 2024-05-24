@@ -3,55 +3,55 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - backend  # backend 브랜치에 푸시될 때 실행
+      - backend # backend 브랜치에 푸시될 때 실행
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2  # 리포지토리 코드를 클론
+      - name: Checkout code
+        uses: actions/checkout@v2 # 리포지토리 코드를 클론
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '18'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18.16.0' # Node.js 버전 설정
 
-    - name: Install PNPM
-      run: npm install -g pnpm
+      - name: Install PNPM
+        run: npm install -g pnpm # PNPM 패키지 매니저를 전역 설치
 
-    - name: Install dependencies
-      run: pnpm install
+      - name: Install dependencies
+        run: pnpm install # 프로젝트 의존성 설치
 
-    - name: Build project
-      run: pnpm run build
+      - name: Build project
+        run: pnpm run build # 프로젝트 빌드
 
-    - name: Log in to Docker Hub
-      run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+      - name: Log in to Docker Hub
+        run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin # Docker Hub에 로그인
 
-    - name: Build Docker image
-      run: docker build -t your-dockerhub-username/nest-backend:latest .
+      - name: Build Docker image
+        run: docker build -t hotchapa/burger-nest:latest . # Docker 이미지를 빌드하고 'hotchapa/burger-nest:latest' 태그를 지정
 
-    - name: Push Docker image to Docker Hub
-      run: docker push your-dockerhub-username/nest-backend:latest
+      - name: Push Docker image to Docker Hub
+        run: docker push hotchapa/burger-nest:latest # 빌드된 Docker 이미지를 Docker Hub에 푸시
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build-and-push
+    needs: build-and-push # 'build-and-push' 작업이 완료된 후 실행
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2 # 리포지토리 코드를 클론
 
-    - name: Deploy to EC2
-      run: |
-        ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_KEY }} ubuntu@your-ec2-ip << 'EOF'
-          docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
-          docker pull your-dockerhub-username/nest-backend:latest
-          docker-compose -f /path/to/your/docker-compose.yml up -d
-        EOF
-      env:
-        DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
-        DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        EC2_KEY: ${{ secrets.EC2_KEY }}
+      - name: Deploy to EC2
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_KEY }} ubuntu@your-ec2-ip << 'EOF'
+            docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
+            docker pull hotchapa/burger-nest:latest 
+            docker-compose -f /path/to/your/docker-compose.yml up -d 
+          EOF
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }} # Docker Hub 사용자 이름
+          DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }} # Docker Hub 비밀번호
+          EC2_KEY: ${{ secrets.EC2_KEY }} # EC2 인스턴스에 접근하기 위한 SSH 키
