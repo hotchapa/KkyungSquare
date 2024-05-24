@@ -60,7 +60,7 @@ jobs:
           echo "${{ secrets.EC2_KEY }}" > private_key.pem
           chmod 600 private_key.pem
 
-      - name: Deploy to EC2
+      - name: Deploy to EC2 
         run: |
           public_ip=${{ secrets.EC2_PUBLIC_IP }}
           echo "Public IP: $public_ip"
@@ -77,3 +77,4 @@ jobs:
           MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
           MYSQL_USER: ${{ secrets.MYSQL_USER }}
           MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
+# test
