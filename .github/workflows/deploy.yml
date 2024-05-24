@@ -103,7 +103,7 @@ jobs:
 
             # GitHub Actions 워크플로우에서 복제한 코드를 사용하여 프로젝트 디렉토리에 복사
             docker pull hotchapa/burger-nest:latest
-
+            cd /back
             # Docker Compose 실행
             docker-compose up -d --remove-orphans
             docker image prune -f
