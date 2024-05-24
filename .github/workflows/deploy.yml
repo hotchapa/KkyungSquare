@@ -47,6 +47,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          path: back
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -94,11 +96,18 @@ jobs:
             newgrp docker
             echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
             sudo systemctl restart docker
-            sudo docker rm -f $(docker ps -qa)
-            sudo docker pull hotchapa/burger-nest:latest
-            cd /home/ubuntu/project/back
+
+            # 프로젝트 디렉토리 생성 및 이동
+            mkdir -p /home/ubuntu/project
+            cd /home/ubuntu/project
+
+            # GitHub Actions 워크플로우에서 복제한 코드를 사용하여 프로젝트 디렉토리에 복사
+            cp -r $GITHUB_WORKSPACE/back/* .
+
+            # Docker Compose 실행
             docker-compose up -d --remove-orphans
             docker image prune -f
+          EOF
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
