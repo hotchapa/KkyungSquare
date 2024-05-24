@@ -1,16 +1,32 @@
-version: '3.8'
+version: '3.1'
 
 services:
-  mysql-db:
-    image: mysql:5.7
-    platform: linux/x86_64 
-    container_name: mysql-db
-    restart: always
-    ports:
-      - 3306:3306
+  db:
+    image: mysql:8
+    container_name: mysql
     environment:
-      MYSQL_ROOT_PASSWORD: '1234'
-      TZ: Asia/Seoul
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3306:3306"
     volumes:
-      - ./db/mysql/data:/var/lib/mysql
-      - ./db/mysql/init:/docker-entrypoint-initdb.d
+      - mysql-data:/var/lib/mysql
+
+  nest:
+    image: hotchapa/nest-backend:latest #내 도커 허브 이미지 주소
+    container_name: nest-backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_HOST: db
+      DATABASE_PORT: 3306
+      DATABASE_USER: ${MYSQL_USER}
+      DATABASE_PASSWORD: ${MYSQL_PASSWORD}
+      DATABASE_NAME: ${MYSQL_DATABASE}
+
+volumes:
+  mysql-data:
