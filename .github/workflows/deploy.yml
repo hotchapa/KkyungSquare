@@ -32,7 +32,7 @@ jobs:
         run: pnpm run build
 
       - name: Log in to Docker Hub
-        run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
+        run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
       - name: Build Docker image
         run: docker build -t hotchapa/burger-nest:latest .
@@ -93,9 +93,9 @@ jobs:
             sudo usermod -aG docker $USER
             newgrp docker
 
-            echo "${DOCKER_HUB_PASSWORD}" | docker login -u "${DOCKER_HUB_USERNAME}" --password-stdin
+            echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
             sudo systemctl restart docker
-            docker-compose -f /home/ubuntu/project/back/docker-compose.yml up -d
+            docker-compose -f /home/ubuntu/back/docker-compose.yml up -d
           EOF
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
