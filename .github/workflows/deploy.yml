@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4 # 최신 버전으로 업데이트
         with:
-          path: back # back 폴더만 클론
+          path: ./back # back 폴더만 클론
 
       - name: Set up Node.js
         uses: actions/setup-node@v4 # 최신 버전으로 업데이트
@@ -46,7 +46,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4 # 최신 버전으로 업데이트
         with:
-          path: back # back 폴더만 클론
+          path: ./back # back 폴더만 클론
 
       - name: Deploy to EC2
         run: |
