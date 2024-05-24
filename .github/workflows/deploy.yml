@@ -9,6 +9,10 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: back
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # 최신 버전으로 업데이트
@@ -22,22 +26,16 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: |
-          cd back
-          pnpm install # 의존성 설치
+        run: pnpm install # 의존성 설치
 
       - name: Build project
-        run: |
-          cd back
-          pnpm run build # 프로젝트 빌드
+        run: pnpm run build # 프로젝트 빌드
 
       - name: Log in to Docker Hub
         run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
       - name: Build Docker image
-        run: |
-          cd back
-          docker build -t hotchapa/burger-nest:latest . # Docker 이미지를 빌드
+        run: docker build -t hotchapa/burger-nest:latest . # Docker 이미지를 빌드
 
       - name: Push Docker image to Docker Hub
         run: docker push hotchapa/burger-nest:latest # Docker 이미지를 Docker Hub에 푸시
@@ -46,12 +44,24 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-push
 
+    defaults:
+      run:
+        working-directory: back
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # 최신 버전으로 업데이트
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
       - name: Deploy to EC2
         run: |
+          public_ip=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=your-ec2-instance-tag" --query "Reservations[*].Instances[*].PublicIpAddress" --output text)
           ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_KEY }} ubuntu@your-ec2-ip << 'EOF'
             docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}
             docker pull hotchapa/burger-nest:latest 
