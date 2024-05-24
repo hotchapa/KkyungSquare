@@ -95,6 +95,7 @@ jobs:
 
             echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
             sudo systemctl restart docker
+            docker pull hotchapa/burger-nest:latest
             docker-compose -f /home/ubuntu/project/back/docker-compose.yml up -d
           EOF
         env:
