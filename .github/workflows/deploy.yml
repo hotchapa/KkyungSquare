@@ -12,8 +12,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # 최신 버전으로 업데이트
-        with:
-          path: back # back 폴더만 클론
 
       - name: Set up Node.js
         uses: actions/setup-node@v4 # 최신 버전으로 업데이트
@@ -24,16 +22,22 @@ jobs:
         run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install # 의존성 설치
+        run: |
+          cd back
+          pnpm install # 의존성 설치
 
       - name: Build project
-        run: pnpm run build # 프로젝트 빌드
+        run: |
+          cd back
+          pnpm run build # 프로젝트 빌드
 
       - name: Log in to Docker Hub
         run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
       - name: Build Docker image
-        run: docker build -t hotchapa/burger-nest:latest . # Docker 이미지를 빌드
+        run: |
+          cd back
+          docker build -t hotchapa/burger-nest:latest . # Docker 이미지를 빌드
 
       - name: Push Docker image to Docker Hub
         run: docker push hotchapa/burger-nest:latest # Docker 이미지를 Docker Hub에 푸시
@@ -45,8 +49,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4 # 최신 버전으로 업데이트
-        with:
-          path: back # back 폴더만 클론
 
       - name: Deploy to EC2
         run: |
