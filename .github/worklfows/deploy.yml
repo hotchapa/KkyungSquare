@@ -11,38 +11,42 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2 # 리포지토리 코드를 클론
+        uses: actions/checkout@v2
+        with:
+          path: back # back 폴더만 클론
 
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.16.0' # Node.js 버전 설정
+          node-version: '18.16.0'
 
       - name: Install PNPM
-        run: npm install -g pnpm # PNPM 패키지 매니저를 전역 설치
+        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: pnpm install # 프로젝트 의존성 설치
+        run: cd back && pnpm install # back 폴더로 이동하여 의존성 설치
 
       - name: Build project
-        run: pnpm run build # 프로젝트 빌드
+        run: cd back && pnpm run build # back 폴더로 이동하여 프로젝트 빌드
 
       - name: Log in to Docker Hub
-        run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin # Docker Hub에 로그인
+        run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
 
       - name: Build Docker image
-        run: docker build -t hotchapa/burger-nest:latest . # Docker 이미지를 빌드하고 'hotchapa/burger-nest:latest' 태그를 지정
+        run: cd back && docker build -t hotchapa/burger-nest:latest . # back 폴더에서 Docker 이미지를 빌드
 
       - name: Push Docker image to Docker Hub
-        run: docker push hotchapa/burger-nest:latest # 빌드된 Docker 이미지를 Docker Hub에 푸시
+        run: docker push hotchapa/burger-nest:latest # Docker 이미지를 Docker Hub에 푸시
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build-and-push # 'build-and-push' 작업이 완료된 후 실행
+    needs: build-and-push
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2 # 리포지토리 코드를 클론
+        uses: actions/checkout@v2
+        with:
+          path: back # back 폴더만 클론
 
       - name: Deploy to EC2
         run: |
@@ -55,3 +59,7 @@ jobs:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }} # Docker Hub 사용자 이름
           DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }} # Docker Hub 비밀번호
           EC2_KEY: ${{ secrets.EC2_KEY }} # EC2 인스턴스에 접근하기 위한 SSH 키
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }} # MySQL 루트 비밀번호
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }} # MySQL 데이터베이스 이름
+          MYSQL_USER: ${{ secrets.MYSQL_USER }} # MySQL 사용자 이름
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }} # MySQL 사용자 비밀번호
