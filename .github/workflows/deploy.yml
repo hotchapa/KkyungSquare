@@ -11,14 +11,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 # 최신 버전으로 업데이트
         with:
           path: back # back 폴더만 클론
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v3 # 최신 버전으로 업데이트
         with:
-          node-version: "20"
+          node-version: "20" # Node.js 20으로 업데이트
 
       - name: Install PNPM
         run: npm install -g pnpm
@@ -44,7 +44,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 # 최신 버전으로 업데이트
         with:
           path: back # back 폴더만 클론
 
