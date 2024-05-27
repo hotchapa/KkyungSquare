@@ -127,7 +127,7 @@ jobs:
           DB_USERNAME=${{ secrets.DB_USERNAME }}
           DB_PASSWORD=${{ secrets.DB_PASSWORD }}
           DB_DATABASE=${{ secrets.DB_DATABASE }}
-          EOT
+EOT
 
           # Docker Compose 실행
           docker-compose -f docker-compose.yml up -d
