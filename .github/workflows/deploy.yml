@@ -135,7 +135,7 @@ jobs:
           # docker run -d --name nest-backend -p 3000:3000 hotchapa/burger-nest:latest
 
           docker image prune -f
-        EOF
+EOF
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
