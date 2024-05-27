@@ -114,7 +114,7 @@ jobs:
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
 
             # .env 파일 생성
-            cat << EOT > .env
+cat <<EOT > .env
 MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
 MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
 MYSQL_USER=${{ secrets.MYSQL_USER }}
