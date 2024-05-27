@@ -109,6 +109,7 @@ jobs:
 
             # GitHub Actions 워크플로우에서 복제한 코드를 사용하여 프로젝트 디렉토리에 복사
             docker pull hotchapa/burger-nest:latest
+            cd back
             docker-compose up -d
 
             # docker run -d --name nest-backend -p 3000:3000 hotchapa/burger-nest:latest
