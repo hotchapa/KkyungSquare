@@ -128,10 +128,10 @@ DB_USERNAME=${{ secrets.DB_USERNAME }}
 DB_PASSWORD=${{ secrets.DB_PASSWORD }}
 DB_DATABASE=${{ secrets.DB_DATABASE }}
 EOT
-            
+
             # Docker Compose 실행
             docker-compose -f docker-compose.yml up -d
-            
+
             # docker run -d --name nest-backend -p 3000:3000 hotchapa/burger-nest:latest
 
             docker image prune -f
