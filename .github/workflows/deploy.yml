@@ -111,11 +111,10 @@ jobs:
             docker pull hotchapa/burger-nest:latest
 
             # Docker Compose 파일 추출
-            docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /path/to/docker-compose.yml /extract
+            docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
 
             # Docker Compose 실행
             docker-compose -f docker-compose.yml up -d
-
             
             # docker run -d --name nest-backend -p 3000:3000 hotchapa/burger-nest:latest
 
