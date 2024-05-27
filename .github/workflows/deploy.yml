@@ -109,6 +109,9 @@ jobs:
 
             # GitHub Actions 워크플로우에서 복제한 코드를 사용하여 프로젝트 디렉토리에 복사
             docker pull hotchapa/burger-nest:latest
+            
+            # .env 파일을 EC2 인스턴스로 전송
+            echo "${{ secrets.DOTENV_FILE_CONTENT }}" > .env
 
             # Docker Compose 파일 추출
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
