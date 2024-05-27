@@ -97,6 +97,12 @@ jobs:
             echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
             sudo systemctl restart docker
 
+            # 기존 컨테이너 중지 및 제거
+            if [ $(docker ps -a -q -f name=nest-backend) ]; then
+              docker stop nest-backend
+              docker rm nest-backend
+            fi
+
             # 프로젝트 디렉토리 생성 및 이동
             mkdir -p /home/ubuntu/project
             cd /home/ubuntu/project
@@ -105,10 +111,7 @@ jobs:
             docker pull hotchapa/burger-nest:latest
             docker run -d --name nest-backend -p 3000:3000 hotchapa/burger-nest:latest
 
-          #   cd back
-          #   # Docker Compose 실행
-          #   docker-compose up -d --remove-orphans
-          docker image prune -f
+            docker image prune -f
           EOF
         env:
           DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
