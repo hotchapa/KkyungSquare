@@ -97,13 +97,25 @@ jobs:
             echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
             sudo systemctl restart docker
 
+            # 기존 컨테이너 중지 및 제거
+            if [ $(docker ps -a -q -f name=nest-backend) ]; then
+              docker stop nest-backend
+              docker rm nest-backend
+            fi
+
             # 프로젝트 디렉토리 생성 및 이동
-            mkdir -p /home/ubuntu/project/back
-            cd /home/ubuntu/project/back
+            mkdir -p /home/ubuntu/project
+            cd /home/ubuntu/project
 
-            # Docker 이미지 풀
+            # GitHub Actions 워크플로우에서 복제한 코드를 사용하여 프로젝트 디렉토리에 복사
             docker pull hotchapa/burger-nest:latest
+            
+            # .env 파일을 EC2 인스턴스로 전송
+            echo "${{ secrets.DOTENV_FILE_CONTENT }}" > .env
 
+            # Docker Compose 파일 추출
+            docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
+            
             # .env 파일 생성
             cat <<EOT >> .env
 MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
@@ -116,9 +128,10 @@ DB_USERNAME=${{ secrets.MYSQL_USER }}
 DB_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
 DB_DATABASE=${{ secrets.MYSQL_DATABASE }}
 EOT
-
             # Docker Compose 실행
             docker-compose -f docker-compose.yml up -d
+            
+            # docker run -d --name nest-backend -p 3000:3000 hotchapa/burger-nest:latest
 
             docker image prune -f
           EOF
