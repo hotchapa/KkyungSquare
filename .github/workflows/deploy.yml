@@ -115,19 +115,19 @@ jobs:
 
             # Docker Compose 파일 추출
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
-            
+
             # .env 파일 생성
             cat <<EOT >> .env
-MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
-MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
-MYSQL_USER=${{ secrets.MYSQL_USER }}
-MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
-DB_HOST=db
-DB_PORT=3306
-DB_USERNAME=${{ secrets.MYSQL_USER }}
-DB_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
-DB_DATABASE=${{ secrets.MYSQL_DATABASE }}
-EOT
+              MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+              MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
+              MYSQL_USER=${{ secrets.MYSQL_USER }}
+              MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+              DB_HOST=db
+              DB_PORT=3306
+              DB_USERNAME=${{ secrets.MYSQL_USER }}
+              DB_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+              DB_DATABASE=${{ secrets.MYSQL_DATABASE }}
+            EOT
             # Docker Compose 실행
             docker-compose -f docker-compose.yml up -d
             
