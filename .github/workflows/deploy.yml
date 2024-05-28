@@ -90,7 +90,7 @@ jobs:
             fi
             sudo usermod -aG docker $USER
             newgrp docker
-            echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+            echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
             sudo systemctl restart docker
             if [ $(docker ps -a -q -f name=nest-backend) ]; then
               docker stop nest-backend
@@ -100,16 +100,16 @@ jobs:
             cd /home/ubuntu/project
             docker pull hotchapa/burger-nest:latest
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
-            cat > .env << EOL
-MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
-MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
-MYSQL_USER=${{ secrets.MYSQL_USER }}
-MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
-DB_HOST=db
-DB_PORT=3306
-DB_USERNAME=${{ secrets.DB_USERNAME }}
-DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-DB_DATABASE=${{ secrets.DB_DATABASE }}
+            cat > .env <<- 'EOL'
+              MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+              MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
+              MYSQL_USER=${{ secrets.MYSQL_USER }}
+              MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+              DB_HOST=db
+              DB_PORT=3306
+              DB_USERNAME=${{ secrets.DB_USERNAME }}
+              DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+              DB_DATABASE=${{ secrets.DB_DATABASE }}
 EOL
             docker-compose -f docker-compose.yml up -d
             docker image prune -f
