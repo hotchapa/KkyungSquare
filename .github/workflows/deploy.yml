@@ -83,13 +83,11 @@ jobs:
               sudo systemctl start docker
               sudo systemctl enable docker
             fi
-
             if ! command -v docker-compose &> /dev/null; then
               echo "Docker Compose not found, installing..."
               sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
               sudo chmod +x /usr/local/bin/docker-compose
             fi
-
             sudo usermod -aG docker $USER
             newgrp docker
             echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
