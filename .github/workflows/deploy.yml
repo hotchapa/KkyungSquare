@@ -90,21 +90,16 @@ jobs:
             fi
             sudo usermod -aG docker $USER
             newgrp docker
-            echo "${DOCKER_HUB_PASSWORD}" | docker login --username "${DOCKER_HUB_USERNAME}" --password-stdin
+            echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login --username "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
             sudo systemctl restart docker
-            # 기존 컨테이너 중지 및 제거
             if [ $(docker ps -a -q -f name=nest-backend) ]; then
               docker stop nest-backend
               docker rm nest-backend
             fi
-            # 프로젝트 디렉토리 생성 및 이동
             mkdir -p /home/ubuntu/project
             cd /home/ubuntu/project
-            # GitHub Actions 워크플로우에서 복제한 코드를 사용하여 프로젝트 디렉토리에 복사
             docker pull hotchapa/burger-nest:latest
-            # Docker Compose 파일 추출
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
-            # .env 파일 생성
             cat > .env << EOL
 MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
 MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
@@ -116,7 +111,6 @@ DB_USERNAME=${{ secrets.DB_USERNAME }}
 DB_PASSWORD=${{ secrets.DB_PASSWORD }}
 DB_DATABASE=${{ secrets.DB_DATABASE }}
 EOL
-            # Docker Compose 실행
             docker-compose -f docker-compose.yml up -d
             docker image prune -f
 EOF
