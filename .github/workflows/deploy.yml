@@ -96,7 +96,7 @@ jobs:
           public_ip=${{ secrets.EC2_PUBLIC_IP }}
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip "echo '${{ secrets.DOCKER_HUB_PASSWORD }}' | docker login --username '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin"
 
-      - name: Deploy Docker container on EC2
+      - name: Stop and remove existing Docker containers
         run: |
           public_ip=${{ secrets.EC2_PUBLIC_IP }}
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
@@ -104,10 +104,27 @@ jobs:
               docker stop nest-backend
               docker rm nest-backend
             fi
-            mkdir -p /home/ubuntu/project
+          EOF
+
+      - name: Create project directory on EC2
+        run: |
+          public_ip=${{ secrets.EC2_PUBLIC_IP }}
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip "mkdir -p /home/ubuntu/project"
+
+      - name: Pull Docker image and extract Docker Compose file
+        run: |
+          public_ip=${{ secrets.EC2_PUBLIC_IP }}
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
             cd /home/ubuntu/project
             docker pull hotchapa/burger-nest:latest
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
+          EOF
+
+      - name: Create .env file on EC2
+        run: |
+          public_ip=${{ secrets.EC2_PUBLIC_IP }}
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
+            cd /home/ubuntu/project
             cat <<EOT > .env
 MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
 MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
@@ -119,6 +136,13 @@ DB_USERNAME=${{ secrets.DB_USERNAME }}
 DB_PASSWORD=${{ secrets.DB_PASSWORD }}
 DB_DATABASE=${{ secrets.DB_DATABASE }}
 EOT
+          EOF
+
+      - name: Deploy Docker container on EC2
+        run: |
+          public_ip=${{ secrets.EC2_PUBLIC_IP }}
+          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
+            cd /home/ubuntu/project
             docker-compose -f docker-compose.yml up -d
             docker image prune -f
           EOF
