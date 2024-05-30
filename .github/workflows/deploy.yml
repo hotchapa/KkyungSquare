@@ -84,7 +84,7 @@ jobs:
             fi
             if ! command -v docker-compose &> /dev/null; then
               echo "Docker Compose not found, installing..."
-              sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-\$(uname -s)-\$(uname -m)" -o /usr/local/bin/docker-compose
+              sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
               sudo chmod +x /usr/local/bin/docker-compose
             fi
             sudo usermod -aG docker $USER
@@ -100,23 +100,31 @@ jobs:
         run: |
           public_ip=${{ secrets.EC2_PUBLIC_IP }}
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
+            # 기존 컨테이너 중지 및 제거
             if [ $(docker ps -a -q -f name=nest-backend) ]; then
               docker stop nest-backend
               docker rm nest-backend
             fi
+            # 프로젝트 디렉토리 생성 및 이동
             mkdir -p /home/ubuntu/project
             cd /home/ubuntu/project
+            # Docker 이미지 풀
             docker pull hotchapa/burger-nest:latest
+            # Docker Compose 파일 추출
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
-            echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
-            echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
-            echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
-            echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
-            echo "DB_HOST=db" >> .env
-            echo "DB_PORT=3306" >> .env
-            echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
-            echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-            echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+            # .env 파일 생성
+            cat <<EOT > .env
+MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
+MYSQL_USER=${{ secrets.MYSQL_USER }}
+MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+DB_HOST=db
+DB_PORT=3306
+DB_USERNAME=${{ secrets.DB_USERNAME }}
+DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+DB_DATABASE=${{ secrets.DB_DATABASE }}
+EOT
+            # Docker Compose 실행
             docker-compose -f docker-compose.yml up -d
             docker image prune -f
           EOF
