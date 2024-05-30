@@ -84,7 +84,7 @@ jobs:
             fi
             if ! command -v docker-compose &> /dev/null; then
               echo "Docker Compose not found, installing..."
-              sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+              sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-\$(uname -s)-\$(uname -m)" -o /usr/local/bin/docker-compose
               sudo chmod +x /usr/local/bin/docker-compose
             fi
             sudo usermod -aG docker $USER
@@ -96,7 +96,7 @@ jobs:
           public_ip=${{ secrets.EC2_PUBLIC_IP }}
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip "echo '${{ secrets.DOCKER_HUB_PASSWORD }}' | docker login --username '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin"
 
-      - name: Stop and remove existing Docker containers
+      - name: Deploy Docker container on EC2
         run: |
           public_ip=${{ secrets.EC2_PUBLIC_IP }}
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
@@ -104,28 +104,11 @@ jobs:
               docker stop nest-backend
               docker rm nest-backend
             fi
-          EOF
-
-      - name: Create project directory on EC2
-        run: |
-          public_ip=${{ secrets.EC2_PUBLIC_IP }}
-          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip "mkdir -p /home/ubuntu/project"
-
-      - name: Pull Docker image and extract Docker Compose file
-        run: |
-          public_ip=${{ secrets.EC2_PUBLIC_IP }}
-          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
+            mkdir -p /home/ubuntu/project
             cd /home/ubuntu/project
             docker pull hotchapa/burger-nest:latest
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
-          EOF
-
-      - name: Create .env file on EC2
-        run: |
-          public_ip=${{ secrets.EC2_PUBLIC_IP }}
-          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
-            cd /home/ubuntu/project
-            echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> .env
+            echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
             echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
             echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
             echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
@@ -134,13 +117,6 @@ jobs:
             echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
             echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
             echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-          EOF
-
-      - name: Deploy Docker container on EC2
-        run: |
-          public_ip=${{ secrets.EC2_PUBLIC_IP }}
-          ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@$public_ip << 'EOF'
-            cd /home/ubuntu/project
             docker-compose -f docker-compose.yml up -d
             docker image prune -f
           EOF
