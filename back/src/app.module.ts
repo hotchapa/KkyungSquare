@@ -23,6 +23,9 @@ import { UsersModule } from './user/user.module';
         database: configService.get<string>('DB_DATABASE'),
         entities: [User],
         synchronize: true, // 개발용으로만 true로 설정, 프로덕션에서는 false 권장
+        extra: {
+          authPlugin: 'mysql_native_password',
+        },
       }),
     }),
     UsersModule,
