@@ -52,6 +52,6 @@ jobs:
             echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
             echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
             echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
-            /usr/local/bin/docker-compose -f docker-compose.yml up -d
+            /usr/local/bin/docker-compose -f /home/ubuntu/project/docker-compose.yml up -d
             docker image prune -f
           EOF
