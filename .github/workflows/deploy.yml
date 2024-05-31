@@ -39,10 +39,22 @@ jobs:
       - run: |
           chmod 400 private_key.pem
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
+            # 기존 docker-compose 바이너리 제거
+            sudo rm /usr/local/bin/docker-compose
+            
+            # docker-compose 바이너리 다시 설치
+            sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            sudo chmod +x /usr/local/bin/docker-compose
+
+            # 프로젝트 디렉토리 설정
             mkdir -p /home/ubuntu/project
             cd /home/ubuntu/project
+
+            # 도커 이미지 풀 및 Compose 파일 추출
             docker pull hotchapa/burger-nest:latest
             docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
+
+            # 환경 변수 설정
             echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
             echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
             echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
@@ -52,6 +64,10 @@ jobs:
             echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
             echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
             echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+
+            # Docker Compose 실행
             /usr/local/bin/docker-compose -f /home/ubuntu/project/docker-compose.yml up -d
+
+            # 도커 이미지 정리
             docker image prune -f
           EOF
