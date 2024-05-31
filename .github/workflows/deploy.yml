@@ -39,12 +39,12 @@ jobs:
       - run: |
           chmod 400 private_key.pem
           ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            # 기존 docker-compose 바이너리 제거
-            sudo rm /usr/local/bin/docker-compose
+            # # 기존 docker-compose 바이너리 제거
+            # sudo rm /usr/local/bin/docker-compose
             
-            # docker-compose 바이너리 다시 설치
-            sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-            sudo chmod +x /usr/local/bin/docker-compose
+            # # docker-compose 바이너리 다시 설치
+            # sudo curl -L "https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+            # sudo chmod +x /usr/local/bin/docker-compose
 
             # 프로젝트 디렉토리 설정
             mkdir -p /home/ubuntu/project
