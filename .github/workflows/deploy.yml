@@ -20,8 +20,8 @@ jobs:
       - run: pnpm install
       - run: pnpm run build
       - run: echo ${{ secrets.DOCKER_HUB_PASSWORD }} | docker login --username ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin
-      - run: docker build -t hotchapa/burger-nest:latest .
-      - run: docker push hotchapa/burger-nest:latest
+      - run: docker build -t hotchapa/cafekkyung-nest:latest .
+      - run: docker push hotchapa/cafekkyung-nest:latest
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,8 +51,8 @@ jobs:
             cd /home/ubuntu/project
 
             # 도커 이미지 풀 및 Compose 파일 추출
-            docker pull hotchapa/burger-nest:latest
-            docker run --rm -v $(pwd):/extract hotchapa/burger-nest:latest cp /usr/src/app/docker-compose.yml /extract
+            docker pull hotchapa/cafekkyung-nest:latest
+            docker run --rm -v $(pwd):/extract hotchapa/cafekkyung-nest:latest cp /usr/src/app/docker-compose.yml /extract
 
             # 환경 변수 설정
             echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" > .env
