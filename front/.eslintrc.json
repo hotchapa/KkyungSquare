@@ -1,3 +1,3 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/babel","next/core-web-vitals"] // next/babel 을 안 넣어주면, Parsing error: Cannot find module 'next/babel'가 에러가 발생함.
 }
