@@ -2,7 +2,7 @@
 export default function Cafe() {
   return (
       <div>
-        <h1>왜 이것만 보일까?</h1>
+        <h1>뀽카페 화면</h1>
       </div>
   );
 }
