@@ -2,9 +2,6 @@
 
 import { styled } from 'styled-components';
 import media from '@/common/styles/media';
-import TopNavbar from '@/common/components/top-navbar';
-import LeftNavbar from '@/common/components/left-navbar';
-import BackImage from '@/common/styles/backimage.png'
 
 const MainPageWrapper = styled.div`
   letter-spacing: -0.04em;
@@ -15,8 +12,6 @@ const MainPageWrapper = styled.div`
   height: 100%;
   background-color: ${({ theme }) => theme.color.back};
   font-size : ${({ theme }) => theme.fontsize.default};
-  background-image: url(${BackImage.src});
-  background-size: cover;
 
   /* ${media.small`
     width: 86.6666vw;
@@ -76,18 +71,9 @@ export default function AfterLoginlayout({ children }: Readonly<{
 }>) {
   return (
     <>
-
-    <TopNavbar/>
-    <MainPageWrapper>
-    <LeftScreenWrapper>
-    <LeftNavbar/>
-    </LeftScreenWrapper>
-    <MainScreenWrapper/>
-      {/* <LeftScreenWrapper></LeftScreenWrapper>
-      <RightScreenWrapper></RightScreenWrapper> */}
-      {children}
-    <RightScreenWrapper/>
-    </MainPageWrapper>
+    
+    {children}
+    
     </>
   )
 };

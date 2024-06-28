@@ -11,7 +11,7 @@ export default function ClientRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={mainTheme}>
       <GlobalStyle />
           {children}
     </ThemeProvider>

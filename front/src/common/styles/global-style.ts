@@ -13,6 +13,8 @@ export const GlobalStyle = createGlobalStyle`
   }
   html,body{
     font-family: 'NanumSquareNeo-Variable';
+    max-width: 100vw;
+    background-color: ${({ theme }) => theme.color.back};
   }
   :root{
     --main: '#3F3131', // 주 색상

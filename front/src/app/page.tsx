@@ -1,14 +1,13 @@
-export default function Home() {
+import HomeEvent from '@/common/components/home-event';
+
+
+export default function Home({ children }: Readonly<{
+  children: React.ReactNode}>){
   return (
     <main>
-      <div>
-        <h1>뀽카페</h1>
-        <p>Dkssudgk</p>
-        <p>안녕하세요</p>
-        <p>안녕하세요</p>
-        <p>안녕하세요</p>
-        <p>안녕하세요</p>
-      </div>
+      <HomeEvent>
+        {children}
+      </HomeEvent>
     </main>
   );
 }
