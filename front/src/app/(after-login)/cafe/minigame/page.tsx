@@ -1,8 +1,7 @@
 
+import HomeEvent from '@/common/components/home-event';
 export default function MiniGame() {
   return (
-      <div>
-        <h1>미니게임</h1>
-      </div>
+    <HomeEvent/>
   );
 }

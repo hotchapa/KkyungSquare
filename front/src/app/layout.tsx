@@ -3,7 +3,7 @@ import StyledComponentsRegistry from '@/common/libs/registry';
 import ClientRootLayout from './client-root-layout';
 
 export const metadata: Metadata = {
-  title: "Cafe KKyung",
+  title: "뀽스퀘어",
   description: "뀽카페에 어서오세요.",
 };
 

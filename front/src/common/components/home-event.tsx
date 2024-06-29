@@ -41,7 +41,7 @@ const Box3 = styled(Box)`
   background-color: #463939;
 `;
 
-export default function HomeEvent({ children }: { children: React.ReactNode }) {
+export default function HomeEvent() {
   const root = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
@@ -56,6 +56,7 @@ export default function HomeEvent({ children }: { children: React.ReactNode }) {
             duration: 13.5,
             scrollTrigger: {
               trigger: element,
+              ease: "power3.inOut",
               start: "top 10%",
               end: "top -10%",
               scrub: true,
@@ -69,6 +70,8 @@ export default function HomeEvent({ children }: { children: React.ReactNode }) {
             opacity: 1,
             x: -100,
             duration: 1.5,
+            z: -2000,
+            ease: "power3.inOut",
             scrollTrigger: {
               trigger: element,
               start: "top 80%",

@@ -2,6 +2,7 @@
 
 import { styled } from 'styled-components';
 import media from '@/common/styles/media';
+import TopNavbar from '@/common/components/top-navbar';
 
 const MainPageWrapper = styled.div`
   letter-spacing: -0.04em;
@@ -51,7 +52,6 @@ const MainScreenWrapper = styled.div`
   margin-bottom: 15vh;
 
 
-
   ${media.medium`
     width: 86.6666vw;
     min-width: initial;
@@ -71,9 +71,7 @@ export default function AfterLoginlayout({ children }: Readonly<{
 }>) {
   return (
     <>
-    
     {children}
-    
     </>
   )
 };

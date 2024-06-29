@@ -1,5 +1,5 @@
 'use client'
-
+import media from '@/common/styles/media';
 import { createGlobalStyle } from "styled-components";
 import { reset } from "styled-reset";
 
@@ -10,12 +10,28 @@ export const GlobalStyle = createGlobalStyle`
     src: url(./fonts/NanumSquareNeo-Variable.ttf) format(ttf);
     font-weight: normal;
     font-style: normal;
-  }
+  } 
   html,body{
     font-family: 'NanumSquareNeo-Variable';
     max-width: 100vw;
     background-color: ${({ theme }) => theme.color.back};
+    letter-spacing: -0.04em;  
+    font-size: 16px;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center ;
+
+    ${media.medium`
+      font-size: 12px;
+    `};
+
+    ${media.small`
+      font-size: 8px;
+    `};
   }
+  
   :root{
     --main: '#3F3131', // 주 색상
     --sub : '#FFC786', // 부 색상
