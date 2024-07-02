@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import Logo from '@/common/styles/logo.png'
 import styled from 'styled-components'
+import Logo from '@/common/styles/logo.png'
 import media from '../styles/media'
 
 const LogoWrapper = styled.div`
@@ -19,14 +19,9 @@ const LogoWrapper = styled.div`
 `
 
 export default function ServiceLogo() {
-  return(
+  return (
     <LogoWrapper>
-      <Image
-        src={Logo}
-        alt='로고'
-        layout="fill"
-        objectFit="contain"
-      />
+      <Image src={Logo} alt="Logo" fill style={{ objectFit: 'contain' }} />
     </LogoWrapper>
   )
-};
+}

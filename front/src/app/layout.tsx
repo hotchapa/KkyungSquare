@@ -1,26 +1,23 @@
-import type { Metadata } from "next";
-import StyledComponentsRegistry from '@/common/libs/registry';
-import ClientRootLayout from './client-root-layout';
-
+import type { Metadata } from 'next'
+import StyledComponentsRegistry from '@/common/libs/registry'
+import ClientRootLayout from '@/common/components/client-root-layout'
 export const metadata: Metadata = {
-  title: "뀽스퀘어",
-  description: "뀽카페에 어서오세요.",
-};
+  title: '뀽스퀘어',
+  description: '뀽카페에 어서오세요.',
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body suppressHydrationWarning>
         <StyledComponentsRegistry>
-          <ClientRootLayout>
-            {children}
-          </ClientRootLayout>  
+          <ClientRootLayout>{children}</ClientRootLayout>
         </StyledComponentsRegistry>
       </body>
     </html>
-  );
+  )
 }

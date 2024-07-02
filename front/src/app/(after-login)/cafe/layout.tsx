@@ -1,4 +1,4 @@
-export default function AfterLoginlayout({
+export default function CafeLayout({
   children,
 }: Readonly<{
   children: React.ReactNode

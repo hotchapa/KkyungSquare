@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import media from '@/common/styles/media';
+import media from '@/common/styles/media'
 
 const TopNavBarWrapper = styled.ul`
   display: flex;
@@ -29,16 +29,16 @@ const TopNavBarWrapper = styled.ul`
 const TopNavBarMenu = styled.li`
   font-size: 1.1em;
   font-weight: 590;
-  color: white; 
+  color: white;
   cursor: pointer;
   padding: 1em;
-  &:hover{
-    color:  ${({ theme }) => theme.color.main};
+  &:hover {
+    color: ${({ theme }) => theme.color.main};
   }
 `
 
 export default function TopNavbar() {
-  return(
+  return (
     <TopNavBarWrapper>
       <TopNavBarMenu>1F&nbsp;&nbsp; 카페</TopNavBarMenu>
       <TopNavBarMenu>2F&nbsp;&nbsp; 캠핑존</TopNavBarMenu>
@@ -47,4 +47,4 @@ export default function TopNavbar() {
       <TopNavBarMenu>세 번째 항목</TopNavBarMenu> */}
     </TopNavBarWrapper>
   )
-};
+}

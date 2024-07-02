@@ -1,11 +1,12 @@
-export default function BeforeLoginlayout({children}:Readonly<{
-  children: React.ReactNode;
+export default function BeforeLoginlayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode
 }>) {
-  return(
+  return (
     <div>
       비포 로그인 레이아웃
       {children}
     </div>
   )
-
-};
+}

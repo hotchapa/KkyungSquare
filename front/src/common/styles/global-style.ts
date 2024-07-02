@@ -1,7 +1,7 @@
 'use client'
-import media from '@/common/styles/media';
-import { createGlobalStyle } from "styled-components";
-import { reset } from "styled-reset";
+import media from '@/common/styles/media'
+import { createGlobalStyle } from 'styled-components'
+import { reset } from 'styled-reset'
 
 export const GlobalStyle = createGlobalStyle`
   ${reset}
