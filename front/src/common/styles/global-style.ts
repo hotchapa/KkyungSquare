@@ -17,12 +17,12 @@ export const GlobalStyle = createGlobalStyle`
     background-color: ${({ theme }) => theme.color.back};
     letter-spacing: -0.04em;  
     font-size: 16px;
-
     display: flex;
     flex-flow: column;
     align-items: center;
     justify-content: center ;
 
+    
     ${media.medium`
       font-size: 12px;
     `};

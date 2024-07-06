@@ -1,8 +1,13 @@
 import AdvertiseArea from '@/common/components/advertise-area'
-export default function CafeLayout({
+export default function CampingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return <>{children}</>
+  return (
+    <>
+      <AdvertiseArea />
+      {children}
+    </>
+  )
 }

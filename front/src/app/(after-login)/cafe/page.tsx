@@ -1,5 +1,5 @@
-import CafePage from '@/features/cafe/components/page'
+import Testdd from '@/features/message/components/dkdkdk'
 
-export default function Cafe() {
-  return <h1>안녕?</h1>
+export default function CafePage() {
+  return <Testdd />
 }

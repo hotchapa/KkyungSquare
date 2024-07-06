@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import styled from 'styled-components'
 import Link from 'next/link'
+
 gsap.registerPlugin(ScrollTrigger)
 
 const EventWrapper = styled.div`

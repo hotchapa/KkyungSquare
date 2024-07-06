@@ -1,3 +1,5 @@
+'use client'
+
 import styled from 'styled-components'
 import media from '@/common/styles/media'
 
@@ -9,9 +11,9 @@ const TopNavBarWrapper = styled.ul`
   height: 4em;
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
-  /* background-color: ${({ theme }) => theme.color.dark}; */
+  background-color: ${({ theme }) => theme.color.back};
+  /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
   gap: 3em;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 
   ${media.medium`
     min-width: initial;

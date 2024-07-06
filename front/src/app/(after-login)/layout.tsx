@@ -1,11 +1,8 @@
+import ClientRootLayout from '@/common/components/client-root-layout'
 export default function AfterLoginlayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <>
-      <>{children}</>
-    </>
-  )
+  return <ClientRootLayout>{children}</ClientRootLayout>
 }
