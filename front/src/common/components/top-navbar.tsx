@@ -42,9 +42,10 @@ const TopNavBarMenu = styled.li`
 export default function TopNavbar() {
   return (
     <TopNavBarWrapper>
-      <TopNavBarMenu>1F&nbsp;&nbsp; 카페</TopNavBarMenu>
+      <TopNavBarMenu>1F&nbsp;&nbsp; 웰컴 그라운드</TopNavBarMenu>
       <TopNavBarMenu>2F&nbsp;&nbsp; 캠핑존</TopNavBarMenu>
-      <TopNavBarMenu>3F&nbsp;&nbsp; 뮤직&nbsp;&nbsp; 스테이션</TopNavBarMenu>
+      <TopNavBarMenu>3F&nbsp;&nbsp; 포에버영</TopNavBarMenu>
+      {/* &nbsp;&nbsp; */}
       {/* <TopNavBarMenu>세 번째 항목</TopNavBarMenu>
       <TopNavBarMenu>세 번째 항목</TopNavBarMenu> */}
     </TopNavBarWrapper>
