@@ -2,6 +2,7 @@
 
 import styled from 'styled-components'
 import media from '@/common/styles/media'
+import Link from 'next/link'
 
 const TopNavBarWrapper = styled.ul`
   display: flex;
@@ -38,13 +39,25 @@ const TopNavBarMenu = styled.li`
     color: ${({ theme }) => theme.color.main};
   }
 `
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`
 
 export default function TopNavbar() {
   return (
     <TopNavBarWrapper>
-      <TopNavBarMenu>1F&nbsp;&nbsp; 웰컴 그라운드</TopNavBarMenu>
-      <TopNavBarMenu>2F&nbsp;&nbsp; 캠핑존</TopNavBarMenu>
-      <TopNavBarMenu>3F&nbsp;&nbsp; 포에버영</TopNavBarMenu>
+      <StyledLink href={'/welcome'}>
+        <TopNavBarMenu>1F&nbsp;&nbsp; 웰컴 그라운드</TopNavBarMenu>
+      </StyledLink>
+
+      <StyledLink href={'/camping'}>
+        <TopNavBarMenu>2F&nbsp;&nbsp; 캠핑존</TopNavBarMenu>
+      </StyledLink>
+
+      <StyledLink href={'/foreveryoung'}>
+        <TopNavBarMenu>3F&nbsp;&nbsp; 포에버영</TopNavBarMenu>
+      </StyledLink>
+
       {/* &nbsp;&nbsp; */}
       {/* <TopNavBarMenu>세 번째 항목</TopNavBarMenu>
       <TopNavBarMenu>세 번째 항목</TopNavBarMenu> */}

@@ -1,5 +1,12 @@
 import NotFoundLayout from '@/common/components/not-found-layout'
+import { NextPage } from 'next'
 
-export default function NotFound() {
-  return <NotFoundLayout></NotFoundLayout>
+const NotFound: NextPage = () => {
+  return (
+    <>
+      <NotFoundLayout />
+    </>
+  )
 }
+
+export default NotFound

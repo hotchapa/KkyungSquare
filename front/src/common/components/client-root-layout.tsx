@@ -18,6 +18,7 @@ const RootLayoutWrapper = styled.div`
 `
 
 const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
+  /* margin-top: 8em; */
   display: flex;
   flex-flow: row;
   align-items: center;
@@ -35,9 +36,7 @@ const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
 const RootBodyWrapper = styled.div`
   display: flex;
   flex-flow: column;
-  /* justify-content: center; */
   align-items: center;
-  background-color: #2d465b;
   max-width: 100vw;
 `
 

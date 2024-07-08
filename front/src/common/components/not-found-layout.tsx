@@ -5,9 +5,7 @@ import { GlobalStyle } from '@/common/styles/global-style'
 import { darkTheme, mainTheme } from '@/common/styles/theme'
 import TopNavbar from '@/common/components/top-navbar'
 import ServiceLogo from '@/common/components/service-logo'
-import PopularArticles from './popular-articles'
-import Brochure from './brochure'
-
+import media from '../styles/media'
 interface RootHeaderWrapperProps {
   $scrolled: boolean
 }
@@ -19,7 +17,7 @@ const HomeLayoutWrapper = styled.div`
   align-items: center;
   width: 100vw;
   height: 100%;
-  /* background-color: ${({ theme }) => theme.color.accent}; */
+  background-color: ${({ theme }) => theme.color.back};
 `
 
 const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
@@ -29,8 +27,6 @@ const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
   top: 0;
   width: 100vw;
   background-color: ${({ theme }) => theme.color.back};
-  /* border-bottom: 0.025em solid;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
   padding: ${({ $scrolled }) => ($scrolled ? '0.2em' : '0.5em')};
   gap: 2em;
   position: fixed;
@@ -39,17 +35,25 @@ const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
 `
 
 const RootBodyWrapper = styled.div`
+  margin-top: 8em;
   display: flex;
   flex-flow: column;
-  align-items: center;
-  background-color: ${({ theme }) => theme.color.back};
-`
-const ArticleWrapper = styled.div`
-  display: flex;
-  align-items: center;
   justify-content: center;
-  font-size: 29px;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  font-size: 20px;
   color: white;
+  ${media.medium`
+    min-width: initial;
+    margin-top: 6em;
+
+  `};
+  ${media.small`
+    height: 30em;
+    margin-top: 6em;
+    font-size : 12px;
+  `};
 `
 
 export default function NotFoundLayout() {
@@ -80,9 +84,7 @@ export default function NotFoundLayout() {
           {!scrolled && <ServiceLogo />}
           <TopNavbar />
         </RootHeaderWrapper>
-        <RootBodyWrapper>
-          <ArticleWrapper>페이지를 찾을 수 없습니다.</ArticleWrapper>
-        </RootBodyWrapper>
+        <RootBodyWrapper>페이지를 찾을 수 없습니다ㅋㅋㅋ</RootBodyWrapper>
       </HomeLayoutWrapper>
     </ThemeProvider>
   )

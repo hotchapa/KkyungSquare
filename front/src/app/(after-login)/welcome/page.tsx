@@ -1,5 +1,5 @@
-import Testdd from '@/features/message/components/dkdkdk'
+import CommunityLayout from '@/features/welcome/components/community-layout'
 
 export default function WelcomePage() {
-  return <Testdd />
+  return <CommunityLayout></CommunityLayout>
 }
