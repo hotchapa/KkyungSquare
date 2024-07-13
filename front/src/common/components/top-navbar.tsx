@@ -47,15 +47,15 @@ export default function TopNavbar() {
   return (
     <TopNavBarWrapper>
       <StyledLink href={'/welcome'}>
-        <TopNavBarMenu>1F&nbsp;&nbsp; 웰컴 그라운드</TopNavBarMenu>
+        <TopNavBarMenu>1F&nbsp;&nbsp; 웰컴&nbsp;그라운드</TopNavBarMenu>
       </StyledLink>
 
       <StyledLink href={'/camping'}>
         <TopNavBarMenu>2F&nbsp;&nbsp; 캠핑존</TopNavBarMenu>
       </StyledLink>
 
-      <StyledLink href={'/foreveryoung'}>
-        <TopNavBarMenu>3F&nbsp;&nbsp; 포에버영</TopNavBarMenu>
+      <StyledLink href={'/lounge'}>
+        <TopNavBarMenu>3F&nbsp;&nbsp; 스퀘어&nbsp;라운지</TopNavBarMenu>
       </StyledLink>
 
       {/* &nbsp;&nbsp; */}

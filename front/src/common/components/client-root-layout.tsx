@@ -5,7 +5,7 @@ import { GlobalStyle } from '@/common/styles/global-style'
 import { darkTheme, mainTheme } from '@/common/styles/theme'
 import TopNavbar from '@/common/components/top-navbar'
 import ServiceLogo from '@/common/components/service-logo'
-import AdvertiseArea from './advertise-area'
+import Footer from './footer'
 interface RootHeaderWrapperProps {
   $scrolled: boolean
 }
@@ -14,11 +14,9 @@ const RootLayoutWrapper = styled.div`
   display: flex;
   flex-flow: column;
   align-items: center;
-  background-color: #2d465b;
 `
 
 const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
-  /* margin-top: 8em; */
   display: flex;
   flex-flow: row;
   align-items: center;
@@ -34,10 +32,11 @@ const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
 `
 
 const RootBodyWrapper = styled.div`
+  padding-top: 9em;
   display: flex;
   flex-flow: column;
   align-items: center;
-  max-width: 100vw;
+  justify-items: flex-start;
 `
 
 export default function ClientRootLayout({
@@ -74,6 +73,7 @@ export default function ClientRootLayout({
         </RootHeaderWrapper>
         <RootBodyWrapper>{children}</RootBodyWrapper>
       </RootLayoutWrapper>
+      <Footer />
     </ThemeProvider>
   )
 }

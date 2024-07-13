@@ -10,22 +10,6 @@ const AdvertiseWrapper = styled.div`
   background-color: ${({ theme }) => theme.color.main};
   width: 100vw;
   height: 30em;
-  margin-top: 8em;
-  margin-bottom: 2em;
-  ${media.medium`
-    min-width: initial;
-    margin-top: 6em;
-
-  `};
-  ${media.small`
-    min-width: 100vw;
-    height: 30em;
-    margin-top: 6em;
-    font-size : 12px;
-    border-radius : 0;
-    justify-content: center;
-    align-items: center;
-  `};
 `
 const AdvertiseTextWrapper = styled.div`
   display: flex;

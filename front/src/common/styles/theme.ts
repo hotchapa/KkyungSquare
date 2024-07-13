@@ -11,14 +11,15 @@ const mainTheme: DefaultTheme = {
     error: '#dc3545', // 오류 상태 색상
     warning: '#ffc107', // 경고 상태 색상
     light: '#f8f9fa', // 밝은 색상
+    mediumDark: '#1B1C28',
     dark: '#0B0B0B', // 어두운 색상
   },
   fontsize: {
-    header1: '32px',
-    header2: '24px',
-    body1: '18px',
-    body2: '16px',
-    default: '13px',
+    header1: '2em',
+    header2: '1.5em',
+    body1: '1.13em',
+    body2: '1em',
+    default: '0.81em',
   },
 }
 
@@ -35,14 +36,15 @@ const darkTheme: DefaultTheme = {
     error: '#dc3545', // 오류 상태 색상
     warning: '#ffc107', // 경고 상태 색상
     light: '#f8f9fa', // 밝은 색상
+    mediumDark: '#1B1C28',
     dark: '#343a40', // 어두운 색상
   },
   fontsize: {
-    header1: '32px',
-    header2: '24px',
-    body1: '18px',
-    body2: '16px',
-    default: '13px',
+    header1: '2em',
+    header2: '1.5em',
+    body1: '1.13em',
+    body2: '1em',
+    default: '0.81em',
   },
 }
 

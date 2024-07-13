@@ -11,6 +11,7 @@ declare module 'styled-components' {
       error: string // 오류 상태 색상
       warning: string // 경고 상태 색상
       light: string // 밝은 색상
+      mediumDark: string
       dark: string // 어두운 색상
     }
     fontsize: {

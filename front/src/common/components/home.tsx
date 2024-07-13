@@ -39,14 +39,14 @@ const HomeLayoutWrapper = styled.div`
 `
 
 const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
+  /* margin-top: 8em; */
   display: flex;
   flex-flow: row;
   align-items: center;
+  /* align-self: baseline; */
   top: 0;
   width: 100vw;
   background-color: ${({ theme }) => theme.color.back};
-  /* border-bottom: 0.025em solid;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
   padding: ${({ $scrolled }) => ($scrolled ? '0.2em' : '0.5em')};
   gap: 2em;
   position: fixed;
@@ -55,11 +55,11 @@ const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
 `
 
 const RootBodyWrapper = styled.div`
+  margin-top: 10em;
   display: flex;
   flex-flow: column;
   align-items: center;
   background-color: ${({ theme }) => theme.color.back};
-  max-width: 100vw;
 `
 const ArticleWrapper = styled.div`
   display: flex;
