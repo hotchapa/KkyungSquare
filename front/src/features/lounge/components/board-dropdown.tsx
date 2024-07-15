@@ -14,7 +14,7 @@ const BoardDropdownHeader = styled.h1`
   align-items: center;
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontsize.header2};
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.text};
   ${media.small`
     font-size : 24px;
     padding : 1em;
@@ -27,7 +27,7 @@ const BoardDropdownBox = styled.div`
   width: 23.25em;
   height: 3em;
   background-color: ${({ theme }) => theme.color.main};
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.text};
   border-radius: 0.5em;
   ${media.medium`
     width: 18.75em;

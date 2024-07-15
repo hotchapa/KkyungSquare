@@ -28,6 +28,7 @@ const HotTopicSectionHeadBar = styled.section`
   ${media.small`
     width: 15.75em;
     padding: 1em;
+    margin-left : 1em;
     font-size: 16px;
   `};
 `
@@ -37,7 +38,7 @@ const HotTopicSectionBox = styled.section`
   flex-direction: column;
   width: 75em;
   border-top: 0.3em solid var(--main);
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.text};
   ${media.medium`
     width: 53.75em;
     

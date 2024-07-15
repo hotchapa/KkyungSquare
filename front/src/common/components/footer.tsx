@@ -10,7 +10,7 @@ const FooterWrapper = styled.footer`
   height: 20em;
   background-color: ${({ theme }) => theme.color.dark};
   margin-top: 10em;
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.text};
 `
 
 export default function Footer() {

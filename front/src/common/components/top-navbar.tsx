@@ -32,7 +32,7 @@ const TopNavBarWrapper = styled.ul`
 const TopNavBarMenu = styled.li`
   font-size: 1.1em;
   font-weight: 590;
-  color: white;
+  color: ${({ theme }) => theme.color.text};
   cursor: pointer;
   padding: 1em;
   &:hover {

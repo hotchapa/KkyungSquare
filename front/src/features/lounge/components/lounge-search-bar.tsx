@@ -14,9 +14,10 @@ const LoungeSearchBarHeader = styled.h1`
   align-items: center;
   font-weight: 600;
   font-size: ${({ theme }) => theme.fontsize.header2};
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.text};
   ${media.small`
-    display : none;
+    font-size : 24px;
+    padding : 1em;
   `};
 `
 const LoungeSearchBarBox = styled.article`
@@ -26,14 +27,16 @@ const LoungeSearchBarBox = styled.article`
   width: 43.75em;
   height: 3em;
   background-color: ${({ theme }) => theme.color.dark};
-  color: ${({ theme }) => theme.color.dark};
+  color: ${({ theme }) => theme.color.text};
   border-radius: 0.5em;
 
   ${media.medium`
     width: 33.75em;
   `};
   ${media.small`
-    display : none;
+    width: 34.75em;
+    height : 5em;
+    padding : 1em;
   `};
 `
 

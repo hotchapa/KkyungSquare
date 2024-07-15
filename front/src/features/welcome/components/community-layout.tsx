@@ -9,7 +9,7 @@ const CommunityLayoutWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: ${({ theme }) => theme.color.accent};
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.text};
 `
 
 export default function CommunityLayout() {

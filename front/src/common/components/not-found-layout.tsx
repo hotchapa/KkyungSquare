@@ -2,7 +2,7 @@
 import { styled, ThemeProvider } from 'styled-components'
 import { useEffect, useState, useLayoutEffect } from 'react'
 import { GlobalStyle } from '@/common/styles/global-style'
-import { darkTheme, mainTheme } from '@/common/styles/theme'
+import { lightTheme, mainTheme } from '@/common/styles/theme'
 import TopNavbar from '@/common/components/top-navbar'
 import ServiceLogo from '@/common/components/service-logo'
 import media from '../styles/media'

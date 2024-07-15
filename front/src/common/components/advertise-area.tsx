@@ -18,7 +18,7 @@ const AdvertiseTextWrapper = styled.div`
   gap: 5em;
   font-size: 18px;
   font-weight: 600;
-  color: ${({ theme }) => theme.color.light};
+  color: ${({ theme }) => theme.color.text};
 `
 export default function AdvertiseArea() {
   return (

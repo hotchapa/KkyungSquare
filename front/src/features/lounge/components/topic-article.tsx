@@ -12,6 +12,6 @@ const LoungeLayoutWrapper = styled.div`
   color: ${({ theme }) => theme.color.text};
 `
 
-export default function ArticleDetail() {
+export default function TopicArticle() {
   return <LoungeLayoutWrapper></LoungeLayoutWrapper>
 }
