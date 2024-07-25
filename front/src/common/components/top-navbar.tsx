@@ -13,7 +13,6 @@ const TopNavBarWrapper = styled.ul`
   border-top-right-radius: 1em;
   border-bottom-right-radius: 1em;
   background-color: ${({ theme }) => theme.color.back};
-  /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
   gap: 3em;
 
   ${media.medium`
@@ -23,18 +22,15 @@ const TopNavBarWrapper = styled.ul`
   ${media.small`
     min-width: 100vw;
     height: 6em;
-    font-size : 12px;
     border-radius : 0;
     justify-content: center;
     align-items: center;
   `};
 `
 const TopNavBarMenu = styled.li`
-  font-size: 1.1em;
   font-weight: 590;
   color: ${({ theme }) => theme.color.text};
   cursor: pointer;
-  padding: 1em;
   &:hover {
     color: ${({ theme }) => theme.color.main};
   }
@@ -58,6 +54,9 @@ export default function TopNavbar() {
         <TopNavBarMenu>3F&nbsp;&nbsp; 스퀘어&nbsp;라운지</TopNavBarMenu>
       </StyledLink>
 
+      <StyledLink href={'/play'}>
+        <TopNavBarMenu>4F&nbsp;&nbsp; 플레이&nbsp;스테이션</TopNavBarMenu>
+      </StyledLink>
       {/* &nbsp;&nbsp; */}
       {/* <TopNavBarMenu>세 번째 항목</TopNavBarMenu>
       <TopNavBarMenu>세 번째 항목</TopNavBarMenu> */}

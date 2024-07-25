@@ -6,13 +6,17 @@ import { reset } from 'styled-reset'
 export const GlobalStyle = createGlobalStyle`
   ${reset}
   @font-face {
-    font-family:'NanumSquareNeo-Variable';
-    src: url(./fonts/NanumSquareNeo-Variable.ttf) format(ttf);
+
+    font-family: 'NanumSquareNeo-Variable';
+    src: local('NanumSquareNeo-Variable'),
+          url('/fonts/NanumSquareNeo-Variable.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-  } 
+  }
+  /* @import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css'); */
+
   html,body{
-    font-family: 'NanumSquareNeo-Variable';
+    font-family: 'NanumSquareNeo-Variable', sans-serif;
     max-width: 100vw;
     background-color: ${({ theme }) => theme.color.back};
     letter-spacing: -0.06em;  
@@ -22,15 +26,23 @@ export const GlobalStyle = createGlobalStyle`
     align-items: center;
     justify-content: center ;
     white-space: nowrap; 
+    a:link {
+    text-decoration: none;
+    color: ${({ theme }) => theme.color.text};
+    }
+    a:visited{
+      text-decoration: none;
+      color: ${({ theme }) => theme.color.text};
+    }
 
 
-    ${media.medium`
+    /* ${media.medium`
       font-size: 12px;
     `};
 
     ${media.small`
       font-size: 8px;
-    `};
+    `}; */
   }
   
   :root{

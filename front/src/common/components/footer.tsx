@@ -6,10 +6,10 @@ const FooterWrapper = styled.footer`
   flex-flow: column;
   justify-content: center;
   align-items: center;
+  margin-top: 15em;
   width: 100vw;
   height: 20em;
   background-color: ${({ theme }) => theme.color.dark};
-  margin-top: 10em;
   color: ${({ theme }) => theme.color.text};
 `
 

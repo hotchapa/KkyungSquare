@@ -15,7 +15,6 @@ const RootLayoutWrapper = styled.div`
   flex-flow: column;
   align-items: center;
 `
-
 const RootHeaderWrapper = styled.div<RootHeaderWrapperProps>`
   display: flex;
   flex-flow: row;
@@ -74,8 +73,8 @@ export default function ClientRootLayout({
           <TopNavbar />
         </RootHeaderWrapper>
         <RootBodyWrapper>{children}</RootBodyWrapper>
+        <Footer />
       </RootLayoutWrapper>
-      <Footer />
     </ThemeProvider>
   )
 }

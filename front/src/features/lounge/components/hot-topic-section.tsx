@@ -9,7 +9,7 @@ const HotTopicSectionWrapper = styled.div`
   /* align-items: flex; */
 `
 const HotTopicSectionHeader = styled.h1`
-  font-weight: 900;
+  font-weight: bolder;
   font-size: ${({ theme }) => theme.fontsize.body1};
   color: ${({ theme }) => theme.color.dark};
 `

@@ -2,6 +2,7 @@
 import styled from 'styled-components'
 import media from '@/common/styles/media'
 import Image from 'next/image'
+import Link from 'next/link'
 import PictureIcon from '../../../../public/assets/picture-icon.svg'
 import CommentsIcon from '../../../../public/assets/comments-icon.svg'
 import LikeIcon from '../../../../public/assets/social-network-icon.svg'
@@ -53,6 +54,14 @@ const StyledImage = styled(Image)`
   `};
 `
 
+const StyledCommentImage = styled(Image)`
+  filter: invert(43%) sepia(100%) saturate(1494%) hue-rotate(342deg)
+    brightness(95%) contrast(100%);
+  ${media.small`
+    display : none;
+  `};
+`
+
 const CommonTopicArticleLikes = styled.span`
   ${media.small`
     display : none;
@@ -70,6 +79,7 @@ const CommonTopicArticleViews = styled.span`
 export default function CommonTopicArticle() {
   const article1: {
     User: { id: string; nickname: string; image: string }
+    id: number
     content: string
     category: string
     likes: number
@@ -78,8 +88,9 @@ export default function CommonTopicArticle() {
     createdAt: string
   } = {
     User: { id: 'elond', nickname: '마시마로', image: '/아아아' },
+    id: 3,
     content:
-      '저는 00에 입사하고 싶은 00입니다. 그래서 정말로 제가 하고 싶은 건 말이에요 진자 너무 많아가지고 어떻게 해야할지 모를 정도로 저는',
+      '게시물 제목이 몇 글자까지 써질까요 알아맞춰 봅시다 코카콜라 맛있다 맛있으면 또먹지',
     likes: 23,
     commentsNum: 30,
     category: '자유',
@@ -93,20 +104,24 @@ export default function CommonTopicArticle() {
   }
 
   return (
-    <CommonTopicArticleWrapper>
-      <StyledImage src={PictureIcon} alt="pictureIcon" width={20} />
-      <CommonTopicArticleContent>{article1.content}</CommonTopicArticleContent>
-      <CommonTopicArticleInfoWrapper>
-        <StyledImage src={LikeIcon} alt="likeIcon" width={20} />
-        <CommonTopicArticleLikes>{article1.likes}</CommonTopicArticleLikes>
-        <StyledImage src={CommentsIcon} alt="commentIcon" width={20} />
-        <CommonTopicArticleCommentsNum>
-          {article1.commentsNum}
-        </CommonTopicArticleCommentsNum>
-        <CommonTopicArticleViews>
-          {formatViews(article1.views)}
-        </CommonTopicArticleViews>
-      </CommonTopicArticleInfoWrapper>
-    </CommonTopicArticleWrapper>
+    <Link href={`/lounge/${article1.category}/${article1.id}`}>
+      <CommonTopicArticleWrapper>
+        <StyledImage src={PictureIcon} alt="pictureIcon" width={15} />
+        <CommonTopicArticleContent>
+          {article1.content}
+        </CommonTopicArticleContent>
+        <CommonTopicArticleInfoWrapper>
+          <StyledImage src={LikeIcon} alt="likeIcon" width={15} />
+          <CommonTopicArticleLikes>{article1.likes}</CommonTopicArticleLikes>
+          <StyledCommentImage src={CommentsIcon} alt="commentIcon" width={15} />
+          <CommonTopicArticleCommentsNum>
+            {article1.commentsNum}
+          </CommonTopicArticleCommentsNum>
+          <CommonTopicArticleViews>
+            {formatViews(article1.views)}
+          </CommonTopicArticleViews>
+        </CommonTopicArticleInfoWrapper>
+      </CommonTopicArticleWrapper>
+    </Link>
   )
 }

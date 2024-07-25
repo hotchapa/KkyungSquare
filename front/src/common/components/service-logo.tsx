@@ -12,6 +12,8 @@ const LogoWrapper = styled.div`
   margin-top: 0.5em;
   margin-bottom: 1em;
   padding: 1.25em;
+  margin-right: 2.5em;
+
   margin-left: 5em;
 
   ${media.small`
