@@ -16,6 +16,7 @@ export const GlobalStyle = createGlobalStyle`
   /* @import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css'); */
 
   html,body{
+    /* font-family: sans-serif; */
     font-family: 'NanumSquareNeo-Variable', sans-serif;
     max-width: 100vw;
     background-color: ${({ theme }) => theme.color.back};

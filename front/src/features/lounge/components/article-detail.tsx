@@ -12,7 +12,7 @@ const ArticleDetailWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-flow: column;
-  width: 80vw;
+  width: 100vw;
   background-color: ${({ theme }) => theme.color.back};
   color: ${({ theme }) => theme.color.text};
   padding: 12em;
@@ -68,6 +68,7 @@ const UserNickname = styled.span`
 
 const MetaData = styled.div`
   display: flex;
+  justify-content: end;
   flex-wrap: wrap;
   gap: 1em;
   margin-bottom: 1em;
@@ -262,7 +263,7 @@ export default function ArticleDetail() {
         <ArticleActions>
           <ActionButton>Like</ActionButton>
           <ActionButton>Comment</ActionButton>
-          <ActionButton>Share</ActionButton>
+          <ActionButton>공유하기</ActionButton>
         </ArticleActions>
         <CommentsSection>
           {comments.map((comment) => (
