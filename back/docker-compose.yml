@@ -15,7 +15,7 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   nest:
-    image: hotchapa/cafekkyung-nest
+    image: hotchapa/kkyungsquare-nest
     container_name: nest-backend
     ports:
       - "3000:3000"
