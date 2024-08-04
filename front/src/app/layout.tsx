@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import StyledComponentsRegistry from '@/common/libs/registry'
 
 export const metadata: Metadata = {
   title: '뀽스퀘어',
@@ -14,7 +13,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body suppressHydrationWarning>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <>{children}</>
       </body>
     </html>
   )

@@ -1,0 +1,171 @@
+// import { css, type CSSObject, type Interpolation } from 'styled-components'
+
+// export type Breakpoints = 'small' | 'medium' | 'large'
+
+// export const breakpoints: Record<Breakpoints, string> = {
+//   small: '@media (max-width: 639px)',
+//   medium: '@media (max-width: 1047px)',
+//   large: '@media (min-width: 1048px)',
+// }
+
+// const media = Object.entries(breakpoints).reduce(
+//   (acc, [key, value]) => {
+//     return {
+//       ...acc,
+//       [key]: (
+//         first: CSSObject | TemplateStringsArray,
+//         ...interpolations: Interpolation<any>[]
+//       ) => css`
+//         ${value} {
+//           ${css(first, ...interpolations)}
+//         }
+//       `,
+//     }
+//   },
+//   {} as Record<Breakpoints, any>
+// )
+
+// export default media
+
+// 'use client'
+// import media from '@/common/styles/media'
+// import { createGlobalStyle } from 'styled-components'
+// import { reset } from 'styled-reset'
+
+// export const GlobalStyle = createGlobalStyle`
+//   ${reset}
+//   @font-face {
+
+//     font-family: 'NanumSquareNeo-Variable';
+//     src: local('NanumSquareNeo-Variable'),
+//           url('/fonts/NanumSquareNeo-Variable.ttf') format('truetype');
+//     font-weight: normal;
+//     font-style: normal;
+//   }
+//   /* @import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css'); */
+
+//   html,body{
+//     /* font-family: sans-serif; */
+//     font-family: 'NanumSquareNeo-Variable', sans-serif;
+//     max-width: 100vw;
+//     background-color: ${({ theme }) => theme.color.back};
+//     letter-spacing: -0.06em;  
+//     font-size: 16px;
+//     display: flex;
+//     flex-flow: column;
+//     align-items: center;
+//     justify-content: center ;
+//     white-space: nowrap; 
+//     a:link {
+//     text-decoration: none;
+//     color: ${({ theme }) => theme.color.text};
+//     }
+//     a:visited{
+//       text-decoration: none;
+//       color: ${({ theme }) => theme.color.text};
+//     }
+
+
+//     /* ${media.medium`
+//       font-size: 12px;
+//     `};
+
+//     ${media.small`
+//       font-size: 8px;
+//     `}; */
+//   }
+  
+//   :root{
+//     --main: #0066FF; // 주 색상
+//     --sub : #FFC786; // 부 색상
+//     --back: #A68068; // 배경 색상
+//     --text : #010101; // 텍스트 색상
+//     --accent : #FF6B00; // 강조 색상
+//     --success: #28a745; // 성공 상태 색상
+//     --error: #dc3545; // 오류 상태 색상
+//     --warning: #ffc107; // 경고 상태 색상
+//     --light : #f8f9fa; // 밝은 색상
+//     --dark : #343a40; // 어두운 색상
+//     --lightOpacity10 : rgba(248, 249, 250, 0.1); // 투명도 10%의 흰색
+//   }
+// `
+
+
+// import { DefaultTheme } from 'styled-components'
+
+// const mainTheme: DefaultTheme = {
+//   color: {
+//     main: '#0066FF', // 주 색상
+//     sub: '#15F288', // 부 색상
+//     back: '#23212D', // 배경 색상
+//     text: '#f8f9fa', // 텍스트 색상
+//     accent: '#FF6B00', // 강조 색상
+//     success: '#28a745', // 성공 상태 색상
+//     error: '#dc3545', // 오류 상태 색상
+//     warning: '#ffc107', // 경고 상태 색상
+//     light: '#f8f9fa', // 밝은 색상
+//     mediumDark: '#1B1C28',
+//     dark: '#0B0B0B', // 어두운 색상
+//   },
+//   fontsize: {
+//     header1: '2em',
+//     header2: '1.5em',
+//     body1: '1.13em',
+//     body2: '1em',
+//     default: '0.81em',
+//   },
+// }
+
+// export { mainTheme }
+
+// const lightTheme: DefaultTheme = {
+//   color: {
+//     main: '#0066FF', // 주 색상
+//     sub: '#15F288', // 부 색상
+//     back: '#f8f9fa', // 배경 색상
+//     text: '#0B0B0B', // 텍스트 색상
+//     accent: '#FF6B00', // 강조 색상
+//     success: '#28a745', // 성공 상태 색상
+//     error: '#dc3545', // 오류 상태 색상
+//     warning: '#ffc107', // 경고 상태 색상
+//     light: '#f8f9fa', // 밝은 색상
+//     mediumDark: '#EDEDED',
+//     dark: '#EDEDED', // 어두운 색상
+//   },
+//   fontsize: {
+//     header1: '2em',
+//     header2: '1.5em',
+//     body1: '1.13em',
+//     body2: '1em',
+//     default: '0.81em',
+//   },
+// }
+
+// export { lightTheme }
+
+// import 'styled-components'
+// declare module 'styled-components' {
+//   export interface SquareTheme {
+//     color: {
+//       main: string // 주 색상
+//       sub: string // 부 색상
+//       back: string // 배경 색상
+//       text: string // 텍스트 색상
+//       accent: string // 강조 색상
+//       success: string // 성공 상태 색상
+//       error: string // 오류 상태 색상
+//       warning: string // 경고 상태 색상
+//       light: string // 밝은 색상
+//       mediumDark: string
+//       dark: string // 어두운 색상
+//     }
+//     fontsize: {
+//       header1: string
+//       header2: string
+//       body1: string
+//       body2: string
+//       default: string
+//     }
+//   }
+//   export interface DefaultTheme extends SquareTheme {}
+// }

@@ -1,4 +1,3 @@
-import AdvertiseArea from '@/common/components/advertise-area'
 export default function CampingLayout({
   children,
 }: Readonly<{
@@ -6,7 +5,6 @@ export default function CampingLayout({
 }>) {
   return (
     <>
-      <AdvertiseArea />
       {children}
     </>
   )
