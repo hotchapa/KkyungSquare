@@ -1,0 +1,27 @@
+// 기본 색상 변수
+// $main: #0066ff;
+// $background: #e2e8f1;
+// $red: #f33434;
+// $black: #0a0b0b;
+// $white: #fafcfe;
+// $gray: #c1cad8;
+// $border: #e0e6eb;
+// $strong-border: #7c7373;
+
+:root {
+  color-scheme: light;
+  --white: #fafcfe;
+  --background: #e2e8f1;
+  --text-color: #0a0b0b;
+  --border: #e0e6eb;
+  --strong-border: #7c7373;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --white: #fafcfe;
+  --background: #3f8787;
+  --text-color: #fafcfe;
+  --border: #e0e6eb;
+  --string-border: #7c7373;
+}

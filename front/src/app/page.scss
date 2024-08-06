@@ -1,0 +1,7 @@
+.dd {
+  display: flex;
+  width: 1000px;
+  height: 200px;
+  background: --background;
+  border: 1px solid &border;
+}
