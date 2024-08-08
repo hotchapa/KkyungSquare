@@ -7,21 +7,28 @@
 // $gray: #c1cad8;
 // $border: #e0e6eb;
 // $strong-border: #7c7373;
-
 :root {
   color-scheme: light;
-  --white: #fafcfe;
-  --background: #e2e8f1;
-  --text-color: #0a0b0b;
-  --border: #e0e6eb;
-  --strong-border: #7c7373;
+  --white: rgba(250, 252, 254, 1);
+  --white80: rgba(250, 252, 254, 0.8);
+  --background: rgba(226, 232, 241, 1);
+  --text-color: rgba(10, 11, 11, 1);
+  --black: rgba(10, 11, 11, 1);
+  --black10: rgba(10, 11, 11, 0.1);
+  --black5: rgba(10, 11, 11, 0.05);
+  --border: rgba(224, 230, 235, 1);
+  --strong-border: rgba(124, 115, 115, 1);
 }
 
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --white: #fafcfe;
-  --background: #3f8787;
-  --text-color: #fafcfe;
-  --border: #e0e6eb;
-  --string-border: #7c7373;
+  --white: rgba(10, 11, 11, 1);
+  --background: rgba(10, 11, 11, 1);
+  --text-color: rgba(250, 252, 254, 1);
+  --border: rgba(224, 230, 235, 1);
+  --black10: rgba(10, 11, 11, 0.1);
+  --black5: rgba(10, 11, 11, 0.05);
+  --white80: rgba(10, 11, 11, 0.8);
+
+  --string-border: rgba(10, 11, 11, 1);
 }
