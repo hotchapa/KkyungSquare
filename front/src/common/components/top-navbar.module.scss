@@ -1,0 +1,89 @@
+@use '@/common/styles/mixins' as mixins;
+@use '@/common/styles/variables' as variables;
+
+.nav-wrapper {
+  position: fixed;
+  top: 0;
+  user-select: none;
+  width: 100%;
+  backdrop-filter: blur(5px);
+  background: var(--white80);
+  @include mixins.flex(center, center);
+  z-index: 999;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+  transition:
+    opacity 0.15s ease-in-out,
+    transform 0.15s ease-in-out;
+  .head-section {
+    width: 1280px;
+    @include mixins.flex(flex-start, center);
+    margin-left: 10px;
+    .logo-section {
+      @include mixins.flex(center, center);
+      margin-right: 80px;
+      gap: 8px;
+      .logo-image {
+        @include mixins.flex(center, center);
+        border-radius: 5px;
+        width: 27px;
+        height: 27px;
+        background: var(--black);
+      }
+      .logo {
+        width: auto;
+        white-space: nowrap;
+        font-size: variables.$base + 8px;
+        letter-spacing: -2.1px;
+        font-weight: variables.$fw-extra-bold;
+      }
+    }
+
+    .nav-section {
+      @include mixins.flex(center, center);
+      height: 66px;
+      gap: 16px;
+      white-space: nowrap;
+
+      .nav-ul {
+        @include mixins.flex(space-between, center);
+
+        a {
+          text-decoration: none;
+          color: inherit;
+          :hover {
+            font-weight: variables.$fw-semi-bold;
+            background: var(--black5);
+            transition: 0.05s ease-in-out;
+            box-shadow: 0px 0px 4px rgba(197, 197, 197, 0.1);
+          }
+        }
+        .nav-li {
+          @include mixins.flex(center, center);
+          padding: 12.5px;
+          letter-spacing: -1px;
+          font-size: variables.$base + 2px;
+          border-radius: 15px;
+          font-weight: variables.$fw-regular;
+        }
+      }
+    }
+    @include mixins.respond(lg) {
+      .head-section {
+        @include mixins.flex(flex-start, center);
+      }
+      .nav-section {
+        .nav-ul {
+          display: none;
+          .nav-li {
+            display: none;
+          }
+        }
+      }
+    }
+    // @include mixins.respond(md) {
+    //   .nav-section {
+    //     @include mixins.flex(flex-start, center);
+    //   }
+    // }
+  }
+}
