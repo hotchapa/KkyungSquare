@@ -24,10 +24,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={pretendard.className}>
         <ThemeProvider>
-          <TopNavbar />
-          <div className='child'>
-          {children}
-          </div>
+          {/* <TopNavbar /> */}
+          <div className="child">{children}</div>
         </ThemeProvider>
       </body>
     </html>

@@ -1,0 +1,8 @@
+@use '@/common/styles/mixins' as mixins;
+
+.wow {
+  // @include mixins.flex(center, center);
+  width: 50dvw;
+  height: 2000px;
+  background: var(--black10);
+}

@@ -1,0 +1,29 @@
+@use '@/common/styles/mixins' as mixins;
+@use '@/common/styles/variables' as variables;
+.login-wrapper {
+  width: 400px;
+  height: 500px;
+  @include mixins.flex(center, center);
+  background: var(--white);
+}
+
+.login-form {
+  flex-direction: column;
+  @include mixins.flex(center, center);
+  gap: 5px;
+}
+.login-input {
+  width: 250px;
+  height: 30px;
+}
+
+.login-submit {
+  cursor: pointer;
+  width: 250px;
+  height: 40px;
+  background: var(--black);
+  color: var(--white);
+  :hover {
+    background: var(--white);
+  }
+}

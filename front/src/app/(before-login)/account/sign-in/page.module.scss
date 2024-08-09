@@ -1,0 +1,8 @@
+@use '@/common/styles/mixins' as mixins;
+
+.account-wrapper {
+  width: 100dvw;
+  height: 100dvh;
+  background: linear-gradient(90deg, #3a79f3 0%, #3a81ed 100%);
+  @include mixins.flex(center, center);
+}

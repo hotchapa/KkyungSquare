@@ -1,4 +1,3 @@
-// TopNavbar component
 'use client'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -13,16 +12,12 @@ export default function TopNavbar() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY
-      // Check the direction of the scroll
       if (scrollTop > lastScrollTop && scrollTop > 200) {
-        // Scrolling down
         setHidden(true)
       } else if (scrollTop < lastScrollTop && scrollTop > 200) {
-        // Scrolling up
         setHidden(false)
       }
 
-      // Update the last scroll position
       setLastScrollTop(scrollTop)
     }
 
@@ -51,26 +46,29 @@ export default function TopNavbar() {
 
         <div className={styles['nav-section']}>
           <ul className={styles['nav-ul']}>
-            <Link href={'/welcome'}>
+            <Link href={'/welcome'} scroll={false}>
               <li className={styles['nav-li']}>1F&nbsp;&nbsp;웰컴 그라운드</li>
             </Link>
           </ul>
           <ul className={styles['nav-ul']}>
-            <Link href={'/camping'}>
+            <Link href={'/camping'} scroll={false}>
               <li className={styles['nav-li']}>2F&nbsp;&nbsp;캠핑존</li>
             </Link>
           </ul>
           <ul className={styles['nav-ul']}>
-            <Link href={'/lounge'}>
+            <Link href={'/lounge'} scroll={false}>
               <li className={styles['nav-li']}>3F&nbsp;&nbsp;스퀘어 라운지</li>
             </Link>
           </ul>
           <ul className={styles['nav-ul']}>
-            <Link href={'/welcome'}>
+            <Link href={'/welcome'} scroll={false}>
               <li className={styles['nav-li']}>
                 4F&nbsp;&nbsp;플레이 스테이션
               </li>
             </Link>
+          </ul>
+          <ul>
+            <Link href={'/account/sign-in'}>로그인</Link>
           </ul>
         </div>
       </div>
