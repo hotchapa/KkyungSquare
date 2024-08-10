@@ -1,3 +1,4 @@
+'use client'
 import styles from './login-form.module.scss'
 
 export default function LoginForm() {

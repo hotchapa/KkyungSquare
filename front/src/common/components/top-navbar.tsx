@@ -29,7 +29,7 @@ export default function TopNavbar() {
   }, [lastScrollTop])
 
   return (
-    <header
+    <main
       className={styles['nav-wrapper']}
       style={{
         // opacity: scrolled ? 1 : 1,
@@ -67,11 +67,20 @@ export default function TopNavbar() {
               </li>
             </Link>
           </ul>
-          <ul>
-            <Link href={'/account/sign-in'}>로그인</Link>
-          </ul>
+          <div className={styles['user-section']}>
+            <ul className={styles['user-ul']}>
+              <Link href={'/account/sign-in'}>
+                <li className={styles['user-li']}>로그인</li>
+              </Link>
+            </ul>
+            <ul className={styles['user-ul']}>
+              <Link href={'/account/sign-in'}>
+                <li className={styles['user-li']}>서비스 안내</li>
+              </Link>
+            </ul>
+          </div>
         </div>
       </div>
-    </header>
+    </main>
   )
 }

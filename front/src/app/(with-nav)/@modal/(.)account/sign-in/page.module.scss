@@ -1,0 +1,14 @@
+@use '@/common/styles/mixins' as mixins;
+
+.account-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100dvw;
+  height: 100%;
+  @include mixins.flex(center, center);
+  background: var(--black10);
+  backdrop-filter: blur(15px);
+}

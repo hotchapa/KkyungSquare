@@ -1,14 +1,13 @@
 import styles from './layout.module.scss'
 import TopNavbar from '@/common/components/top-navbar'
-export default function AfterLoginlayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+import { ChildrenProps } from '@/common/types/common-type'
+
+export default function AfterLoginlayout({ children, modal }: ChildrenProps) {
   return (
     <>
       <TopNavbar />
       <div className={styles.child}>{children}</div>
+      {modal}
     </>
   )
 }

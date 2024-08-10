@@ -34,19 +34,14 @@
         white-space: nowrap;
         font-size: variables.$base + 8px;
         letter-spacing: -2.1px;
-        font-weight: variables.$fw-extra-bold;
+        font-weight: variables.$fw-bold;
       }
     }
-
-    .nav-section {
+    .user-section {
+      flex: 1;
       @include mixins.flex(center, center);
-      height: 66px;
-      gap: 16px;
-      white-space: nowrap;
-
-      .nav-ul {
+      .user-ul {
         @include mixins.flex(space-between, center);
-
         a {
           text-decoration: none;
           color: inherit;
@@ -55,6 +50,37 @@
             background: var(--black5);
             transition: 0.05s ease-in-out;
             box-shadow: 0px 0px 4px rgba(197, 197, 197, 0.1);
+            color: var(--main);
+          }
+        }
+        .user-li {
+          @include mixins.flex(center, center);
+          padding: 12.5px;
+          letter-spacing: -1px;
+          font-size: variables.$base;
+          border-radius: 15px;
+          font-weight: variables.$fw-regular;
+        }
+      }
+    }
+    .nav-section {
+      flex: 4;
+      @include mixins.flex(center, center);
+      height: 66px;
+      gap: 16px;
+      white-space: nowrap;
+
+      .nav-ul {
+        @include mixins.flex(space-between, center);
+        a {
+          text-decoration: none;
+          color: inherit;
+          :hover {
+            font-weight: variables.$fw-semi-bold;
+            background: var(--black5);
+            transition: 0.05s ease-in-out;
+            box-shadow: 0px 0px 4px rgba(197, 197, 197, 0.1);
+            color: var(--main);
           }
         }
         .nav-li {
