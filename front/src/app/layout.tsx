@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './style.scss'
 import { ThemeProvider } from 'next-themes'
+import { MSWComponent } from './MSWCoponent'
 import TopNavbar from '@/common/components/top-navbar'
 import localFont from 'next/font/local'
 
@@ -25,7 +26,8 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <ThemeProvider>
           {/* <TopNavbar /> */}
-          <div className="child">{children}</div>
+          <MSWComponent/>
+            <div className="child">{children}</div>
         </ThemeProvider>
       </body>
     </html>
