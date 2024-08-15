@@ -1,0 +1,6 @@
+@use '@/common/styles/mixins' as mixins;
+@use '@/common/styles/variables' as variables;
+
+.wrapper {
+  @include mixins.flex(center, center);
+}

@@ -10,5 +10,5 @@
   height: 100%;
   @include mixins.flex(center, center);
   background: var(--black10);
-  backdrop-filter: blur(15px);
+  // backdrop-filter: blur(15px);
 }

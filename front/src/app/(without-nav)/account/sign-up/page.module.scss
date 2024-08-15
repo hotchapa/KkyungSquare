@@ -1,0 +1,8 @@
+@use '@/common/styles/mixins' as mixins;
+
+.sign-up-wrapper {
+  width: 100dvw;
+  height: 100dvh;
+  @include mixins.flex(center, center);
+  background: var(--background);
+}

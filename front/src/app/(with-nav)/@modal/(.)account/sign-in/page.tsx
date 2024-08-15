@@ -1,9 +1,9 @@
 import styles from './page.module.scss'
-import LoginForm from '@/features/account/sign-in-form'
+import SignInForm from '@/features/account/components/sign-in-form'
 export default function SignInPage() {
   return (
     <main className={styles['account-wrapper']}>
-      <LoginForm></LoginForm>
+      <SignInForm></SignInForm>
     </main>
   )
 }

@@ -1,0 +1,85 @@
+@use '@/common/styles/mixins' as mixins;
+@use '@/common/styles/variables' as variables;
+
+.loginWrapper {
+  width: 400px;
+  height: 500px;
+  @include mixins.flex(center, center);
+  background: var(--white);
+  border-radius: 15px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+.loginForm {
+  flex-direction: column;
+  @include mixins.flex(center, center);
+  gap: 5px;
+}
+
+.modalHeader {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  background-color: var(--light-gray);
+  border-bottom: 1px solid var(--gray);
+}
+
+.modalBody {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  padding: 15px;
+}
+
+.inputDiv {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.inputLabel {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.loginInput {
+  width: 250px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+}
+
+.modalFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.loginSubmit {
+  cursor: pointer;
+  width: 250px;
+  height: 40px;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  :hover {
+    background: var(--white);
+    color: var(--black);
+    border: 1px solid var(--black);
+  }
+}
+
+.error {
+  margin-top: 10px;
+  color: var(--red);
+  font-size: 12px;
+}

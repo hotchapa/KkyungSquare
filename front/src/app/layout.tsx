@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import './style.scss'
 import { ThemeProvider } from 'next-themes'
 import { MSWComponent } from './MSWCoponent'
-import TopNavbar from '@/common/components/top-navbar'
 import localFont from 'next/font/local'
+import '@/common/components/top-navbar.module.scss'
 
 export const metadata: Metadata = {
   title: '뀽스퀘어',
@@ -26,8 +26,8 @@ export default function RootLayout({
       <body className={pretendard.className}>
         <ThemeProvider>
           {/* <TopNavbar /> */}
-          <MSWComponent/>
-            <div className="child">{children}</div>
+          <MSWComponent />
+          <div className="child">{children}</div>
         </ThemeProvider>
       </body>
     </html>

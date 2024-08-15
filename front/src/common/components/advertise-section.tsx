@@ -6,7 +6,7 @@ export default function AdvertiseSection() {
       <section className={styles['ad-section']}>
         <section className={styles['ad-textarea']}>
           <span className={styles['ad-title']}>
-            강조할 제목을 작성하세요. H2 태그가 해당될 것 같습니다. 26px
+            강조할 제목을 작성하세요. H2 태그가 해당됩니다. 26px
           </span>
           <span className={styles['ad-content']}>
             강조할 body를 작성하세요. 16px에 해당합니다. 강조할 body를

@@ -15,16 +15,20 @@ const delay = (ms: number) =>
   new Promise((res) => {
     setTimeout(res, ms)
   })
-
+const User = [
+  { id: 'elonmusk', nickname: 'Elon Musk', image: faker.image.avatar() },
+  { id: 'zerohch0', nickname: '제로초', image: faker.image.avatar() },
+  { id: 'leoturtle', nickname: '레오', image: faker.image.avatar() },
+]
 export const handlers = [
-  // http.post('/api/login', () => {
-  //   console.log('로그인')
-  //   return HttpResponse.json(User[1], {
-  //     headers: {
-  //       'Set-Cookie': 'connect.sid=msw-cookie;HttpOnly;Path=/',
-  //     },
-  //   })
-  // }),
+  http.post('/api/account/sign-in', () => {
+    console.log('로그인')
+    return HttpResponse.json(User[1], {
+      headers: {
+        'Set-Cookie': 'connect.sid=msw-cookie;HttpOnly;Path=/',
+      },
+    })
+  }),
   http.post('/api/logout', () => {
     console.log('로그아웃')
     return new HttpResponse(null, {

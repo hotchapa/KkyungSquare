@@ -2,12 +2,14 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
+// import { useSelectedLayoutSegment } from 'next/navigation'
 import styles from './top-navbar.module.scss'
 import logo from '../../../public/assets/logo.png'
 
 export default function TopNavbar() {
   const [hidden, setHidden] = useState(false)
   const [lastScrollTop, setLastScrollTop] = useState(0)
+  // const segment: string | null = useSelectedLayoutSegment()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,7 +31,7 @@ export default function TopNavbar() {
   }, [lastScrollTop])
 
   return (
-    <main
+    <div
       className={styles['nav-wrapper']}
       style={{
         // opacity: scrolled ? 1 : 1,
@@ -69,18 +71,18 @@ export default function TopNavbar() {
           </ul>
           <div className={styles['user-section']}>
             <ul className={styles['user-ul']}>
-              <Link href={'/account/sign-in'}>
+              <Link href={'/account/sign-in'} scroll={false}>
                 <li className={styles['user-li']}>로그인</li>
               </Link>
             </ul>
             <ul className={styles['user-ul']}>
-              <Link href={'/account/sign-in'}>
-                <li className={styles['user-li']}>서비스 안내</li>
+              <Link href={'/account/sign-in'} scroll={false}>
+                <li className={styles['nav-li']}>서비스 안내</li>
               </Link>
             </ul>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   )
 }
