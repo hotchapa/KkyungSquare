@@ -2,6 +2,10 @@ import { Repository, DataSource } from 'typeorm';
 import { User } from './user.entity';
 import * as bcrypt from 'bcryptjs';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import {
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 
 export class UserRepository extends Repository<User> {
   constructor(private dataSource: DataSource) {
@@ -15,14 +19,20 @@ export class UserRepository extends Repository<User> {
     // 비밀번호 해싱
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
-
     const user = this.create({
       username,
       email,
       password: hashedPassword,
     });
-
-    await this.save(user);
+    try {
+      await this.save(user);
+    } catch (error) {
+      if (error.code === '23505') {
+        throw new ConflictException('유저네임이 이미 존재합니다');
+      } else {
+        throw new InternalServerErrorException();
+      }
+    }
   }
 
   // 회원탈퇴 (사용자 삭제)
