@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { SignUpCredentialsDto } from './dto/sign-up-credential.dto';
 import { Response, Request } from 'express';
 import { JwtAuthGuard } from './jwt-auth.guard';
 
@@ -19,9 +20,9 @@ export class AuthController {
 
   @Post('/signup')
   signUp(
-    @Body(ValidationPipe) authcredentialsDto: AuthCredentialsDto,
+    @Body(ValidationPipe) signupcredentialsDto: SignUpCredentialsDto,
   ): Promise<void> {
-    return this.authService.signUp(authcredentialsDto);
+    return this.authService.signUp(signupcredentialsDto);
   }
 
   @Post('/signin')

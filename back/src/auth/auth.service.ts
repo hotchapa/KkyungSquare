@@ -5,6 +5,7 @@ import {
   ForbiddenException,
 } from '@nestjs/common';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { SignUpCredentialsDto } from './dto/sign-up-credential.dto';
 import { UserRepository } from './user.repository';
 import * as bcrypt from 'bcryptjs';
 import { JwtService } from '@nestjs/jwt';
@@ -17,8 +18,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async signUp(authCredentialsDTO: AuthCredentialsDto): Promise<void> {
-    return this.userRepository.createUser(authCredentialsDTO);
+  async signUp(signupCredentialsDTO: SignUpCredentialsDto): Promise<void> {
+    return this.userRepository.createUser(signupCredentialsDTO);
   }
 
   async signIn(

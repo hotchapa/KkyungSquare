@@ -1,7 +1,8 @@
 import { Repository, DataSource } from 'typeorm';
 import { User } from './user.entity';
 import * as bcrypt from 'bcryptjs';
-import { AuthCredentialsDto } from './dto/auth-credential.dto';
+// import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { SignUpCredentialsDto } from './dto/sign-up-credential.dto';
 import {
   ConflictException,
   InternalServerErrorException,
@@ -13,8 +14,8 @@ export class UserRepository extends Repository<User> {
   }
 
   // 회원가입 (사용자 생성)
-  async createUser(authCredentialsDTO: AuthCredentialsDto): Promise<void> {
-    const { username, password, email } = authCredentialsDTO;
+  async createUser(signupCredentialsDTO: SignUpCredentialsDto): Promise<void> {
+    const { username, password, email } = signupCredentialsDTO;
 
     // 비밀번호 해싱
     const salt = await bcrypt.genSalt();

@@ -1,6 +1,12 @@
-import { IsString, MinLength, MaxLength, Matches } from 'class-validator';
+import {
+  IsString,
+  MinLength,
+  MaxLength,
+  Matches,
+  IsEmail,
+} from 'class-validator';
 
-export class AuthCredentialsDto {
+export class SignUpCredentialsDto {
   @IsString()
   @MinLength(4)
   @MaxLength(20)
@@ -13,4 +19,7 @@ export class AuthCredentialsDto {
     message: '비밀번호는 영어와 숫자만 가능합니다.',
   })
   password: string;
+
+  @IsEmail({}, { message: '유효한 이메일 주소를 입력하세요.' })
+  email: string;
 }
