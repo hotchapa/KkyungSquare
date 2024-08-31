@@ -1,7 +1,6 @@
 import { Repository, DataSource } from 'typeorm';
 import { User } from './user.entity';
 import * as bcrypt from 'bcryptjs';
-// import { AuthCredentialsDto } from './dto/auth-credential.dto';
 import { SignUpCredentialsDto } from './dto/sign-up-credential.dto';
 import {
   ConflictException,
