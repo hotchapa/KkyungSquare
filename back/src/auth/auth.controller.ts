@@ -44,7 +44,10 @@ export class AuthController {
     @Req() request: Request,
     @Res({ passthrough: true }) response: Response,
   ): Promise<{ accessToken: string }> {
+    console.log('받아오긴하니?.');
     const refreshToken = request.cookies['refreshToken'];
+    console.log('지금부터 테스트 들어간다.');
+    console.log('Received refreshToken:', refreshToken);
     const tokens = await this.authService.refreshToken(refreshToken);
     response.cookie('refreshToken', tokens.refreshToken, {
       httpOnly: true,
