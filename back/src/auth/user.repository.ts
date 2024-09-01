@@ -14,13 +14,13 @@ export class UserRepository extends Repository<User> {
 
   // 회원가입 (사용자 생성)
   async createUser(signupCredentialsDTO: SignUpCredentialsDto): Promise<void> {
-    const { username, password, email } = signupCredentialsDTO;
+    const { userId, password, email } = signupCredentialsDTO;
 
     // 비밀번호 해싱
     const salt = await bcrypt.genSalt();
     const hashedPassword = await bcrypt.hash(password, salt);
     const user = this.create({
-      username,
+      userId,
       email,
       password: hashedPassword,
     });
@@ -41,8 +41,8 @@ export class UserRepository extends Repository<User> {
   }
 
   // 특정 사용자 조회
-  async findByUsername(username: string): Promise<User | undefined> {
-    return this.findOne({ where: { username } });
+  async findByuserId(userId: string): Promise<User | undefined> {
+    return this.findOne({ where: { userId } });
   }
 
   // 이메일로 사용자 조회

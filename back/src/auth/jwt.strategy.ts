@@ -17,11 +17,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  async validate(payload: { username: string; sub: number }) {
-    const { username, sub: userId } = payload; // 페이로드에서 userId를 추출
-    const user = await this.userRepository.findOneBy({ id: userId });
+  async validate(payload: { userId: string; sub: number }) {
+    const { userId, sub: id } = payload; // 페이로드에서 userId를 추출
+    const user = await this.userRepository.findOneBy({ id });
 
-    if (!user || user.username !== username) {
+    if (!user || user.userId !== userId) {
       throw new UnauthorizedException();
     }
 

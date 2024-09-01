@@ -25,10 +25,10 @@ export class AuthService {
   async signIn(
     authCredentialsDTO: AuthCredentialsDto,
   ): Promise<{ accessToken: string; refreshToken: string }> {
-    const { username, password } = authCredentialsDTO;
-    const user = await this.userRepository.findByUsername(username);
+    const { userId, password } = authCredentialsDTO;
+    const user = await this.userRepository.findByuserId(userId);
     if (user && (await bcrypt.compare(password, user.password))) {
-      const payload = { username, sub: user.id }; // `sub` 클레임에 userId를 추가
+      const payload = { userId, sub: user.id }; // `sub` 클레임에 userId를 추가
       const accessToken = this.jwtService.sign(payload);
       const refreshToken = this.jwtService.sign(payload, {
         expiresIn: '7d',
@@ -45,10 +45,10 @@ export class AuthService {
     try {
       const payload = this.jwtService.verify(refreshToken);
       const newAccessToken = this.jwtService.sign({
-        username: payload.username,
+        userId: payload.userId,
       });
       const newRefreshToken = this.jwtService.sign(
-        { username: payload.username },
+        { userId: payload.userId },
         { expiresIn: '7d' },
       );
       return { accessToken: newAccessToken, refreshToken: newRefreshToken };

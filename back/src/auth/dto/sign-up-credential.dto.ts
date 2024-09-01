@@ -10,7 +10,7 @@ export class SignUpCredentialsDto {
   @IsString()
   @MinLength(4)
   @MaxLength(20)
-  username: string;
+  userId: string;
 
   @IsString()
   @MinLength(8)
