@@ -1,20 +1,17 @@
 'use client'
+import { useState } from 'react'
 import styles from './sign-up-form.module.scss'
-import { useFormState, useFormStatus } from 'react-dom'
 import onSubmit from '../libs/sign-up-action'
 
 function showMessage(message: string | null | undefined) {
-  if (message === 'no_id') {
+  if (message === 'no_userId') {
     return '아이디를 입력하세요.'
   }
-  if (message === 'no_name') {
-    return '닉네임을 입력하세요.'
+  if (message === 'no_email') {
+    return '이메일을 입력하세요.'
   }
   if (message === 'no_password') {
     return '비밀번호를 입력하세요.'
-  }
-  if (message === 'no_image') {
-    return '이미지를 업로드하세요.'
   }
   if (message === 'user_exists') {
     return '이미 사용 중인 아이디입니다.'
@@ -23,26 +20,34 @@ function showMessage(message: string | null | undefined) {
 }
 
 export default function SignUpForm() {
-  const [state, formAction] = useFormState(onSubmit, { message: null })
-  const { pending } = useFormStatus()
+  const [error, setError] = useState<string | null>(null)
+  const [isPending, setIsPending] = useState<boolean>(false)
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setIsPending(true)
+    const formData = new FormData(event.currentTarget as HTMLFormElement)
+    const result = await onSubmit(formData)
+    setError(result.message)
+    setIsPending(false)
+  }
 
   return (
     <>
       <div className={styles.loginWrapper}>
         <div className={styles.loginForm}>
           <div className={styles.modalHeader}>
-            {/* <BackButton /> */}
             <div>계정을 생성하세요.</div>
           </div>
-          <form action={formAction}>
+          <form onSubmit={handleSubmit}>
             <div className={styles.modalBody}>
               <div className={styles.inputDiv}>
-                <label className={styles.inputLabel} htmlFor="id">
+                <label className={styles.inputLabel} htmlFor="userId">
                   아이디
                 </label>
                 <input
-                  id="id"
-                  name="id"
+                  id="userId"
+                  name="userId"
                   className={styles.loginInput}
                   type="text"
                   placeholder=""
@@ -50,14 +55,14 @@ export default function SignUpForm() {
                 />
               </div>
               <div className={styles.inputDiv}>
-                <label className={styles.inputLabel} htmlFor="name">
-                  닉네임
+                <label className={styles.inputLabel} htmlFor="email">
+                  이메일
                 </label>
                 <input
-                  id="name"
-                  name="name"
+                  id="email"
+                  name="email"
                   className={styles.loginInput}
-                  type="text"
+                  type="email"
                   placeholder=""
                   required
                 />
@@ -75,29 +80,16 @@ export default function SignUpForm() {
                   required
                 />
               </div>
-              <div className={styles.inputDiv}>
-                <label className={styles.inputLabel} htmlFor="image">
-                  프로필
-                </label>
-                <input
-                  id="image"
-                  name="image"
-                  required
-                  className={styles.loginInput}
-                  type="file"
-                  accept="image/*"
-                />
-              </div>
             </div>
             <div className={styles.modalFooter}>
               <button
                 type="submit"
                 className={styles.loginSubmit}
-                disabled={pending}
+                disabled={isPending}
               >
                 가입하기
               </button>
-              <div className={styles.error}>{showMessage(state?.message)}</div>
+              <div className={styles.error}>{showMessage(error)}</div>
             </div>
           </form>
         </div>

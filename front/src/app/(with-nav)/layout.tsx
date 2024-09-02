@@ -1,11 +1,11 @@
 import styles from './layout.module.scss'
-import TopNavbar from '@/common/components/top-navbar'
+import NavbarWrapper from '@/common/components/top-navbar-wrapper'
 import { ChildrenProps } from '@/common/types/common-type'
 
 export default function AfterLoginlayout({ children, modal }: ChildrenProps) {
   return (
     <>
-      <TopNavbar />
+      <NavbarWrapper />
       <div className={styles.child}>{children}</div>
       {modal}
     </>

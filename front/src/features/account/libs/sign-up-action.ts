@@ -1,50 +1,53 @@
-'use server'
-import { redirect } from 'next/navigation'
-// import {signIn} from "@/auth";
+'use client'
 
-export default async (prevState: any, formData: FormData) => {
-  if (!formData.get('id') || !(formData.get('id') as string)?.trim()) {
-    return { message: 'no_id' }
+export default async function onSubmit(formData: FormData) {
+  const errors: { message: string | null } = { message: null }
+
+  if (!formData.get('userId') || !(formData.get('userId') as string)?.trim()) {
+    errors.message = 'no_userId'
+    return errors
   }
-  if (!formData.get('name') || !(formData.get('name') as string)?.trim()) {
-    return { message: 'no_name' }
+  if (!formData.get('email') || !(formData.get('email') as string)?.trim()) {
+    errors.message = 'no_email'
+    return errors
   }
   if (
     !formData.get('password') ||
     !(formData.get('password') as string)?.trim()
   ) {
-    return { message: 'no_password' }
+    errors.message = 'no_password'
+    return errors
   }
-  if (!formData.get('image')) {
-    return { message: 'no_image' }
-  }
-  let shouldRedirect = false
+
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/account/sign-up`,
+      `${process.env.NEXT_PUBLIC_BASE_URL}/auth/signup`,
       {
-        method: 'post',
-        body: formData,
+        method: 'POST',
+        body: JSON.stringify({
+          userId: formData.get('userId'),
+          email: formData.get('email'),
+          password: formData.get('password'),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
         credentials: 'include',
       }
     )
-    console.log(response.status)
+
     if (response.status === 403) {
-      return { message: 'user_exists' }
+      errors.message = 'user_exists'
+    } else if (response.ok) {
+      errors.message = null
+      window.location.href = '/lounge'
+    } else {
+      errors.message = 'unknown_error'
     }
-    console.log(await response.json())
-    shouldRedirect = true
-    // await signIn("credentials", {
-    //   username: formData.get('id'),
-    //   password: formData.get('password'),
-    //   redirect: false,
-    // })
   } catch (err) {
     console.error(err)
-    return { message: null }
+    errors.message = 'unknown_error'
   }
 
-  if (shouldRedirect) {
-    redirect('/lounge') // try/catch문 안에서 X
-  }
+  return errors
 }

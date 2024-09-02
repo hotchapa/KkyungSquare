@@ -55,6 +55,7 @@
         }
         .user-li {
           @include mixins.flex(center, center);
+          cursor: pointer;
           padding: 12.5px;
           letter-spacing: -1px;
           font-size: variables.$base;

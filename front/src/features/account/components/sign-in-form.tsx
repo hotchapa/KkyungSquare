@@ -1,11 +1,11 @@
 'use client'
+import { useState } from 'react'
 import styles from './sign-in-form.module.scss'
-import { useFormState, useFormStatus } from 'react-dom'
 import onSubmit from '../libs/sign-in-action'
 import Link from 'next/link'
 
 function showMessage(message: string | null | undefined) {
-  if (message === 'no_id') {
+  if (message === 'no_userId') {
     return '아이디를 입력하세요.'
   }
   if (message === 'no_password') {
@@ -15,19 +15,30 @@ function showMessage(message: string | null | undefined) {
 }
 
 export default function SignInForm() {
-  const [state, formAction] = useFormState(onSubmit, { message: null })
-  const { pending } = useFormStatus()
+  const [error, setError] = useState<string | null>(null)
+  const [isPending, setIsPending] = useState<boolean>(false)
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setIsPending(true)
+    const formData = new FormData(event.currentTarget as HTMLFormElement)
+
+    const result = await onSubmit(formData)
+    setError(result.message)
+    setIsPending(false)
+  }
+
   return (
     <div className={styles['login-wrapper']}>
-      <form className={styles['login-form']} action={formAction}>
+      <form className={styles['login-form']} onSubmit={handleSubmit}>
         로그인 테스트기
         <div className={styles.inputDiv}>
-          <label className={styles.inputLabel} htmlFor="id">
+          <label className={styles.inputLabel} htmlFor="userId">
             아이디
           </label>
           <input
-            id="id"
-            name="id"
+            id="userId"
+            name="userId"
             className={styles.loginInput}
             type="text"
             placeholder=""
@@ -49,7 +60,7 @@ export default function SignInForm() {
         </div>
         <button
           type="submit"
-          disabled={pending}
+          disabled={isPending}
           className={styles['login-submit']}
         >
           로그인
@@ -58,7 +69,7 @@ export default function SignInForm() {
           <button className={styles['login-submit']}>회원가입</button>
         </Link>
       </form>
-      <div className={styles.error}>{showMessage(state?.message)}</div>
+      <div className={styles.error}>{showMessage(error)}</div>
     </div>
   )
 }

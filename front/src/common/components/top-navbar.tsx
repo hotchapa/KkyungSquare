@@ -2,14 +2,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
-// import { useSelectedLayoutSegment } from 'next/navigation'
 import styles from './top-navbar.module.scss'
 import logo from '../../../public/assets/logo.png'
-
-export default function TopNavbar() {
+import signOut from '@/features/account/libs/sign-out.action'
+export default function TopNavbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [hidden, setHidden] = useState(false)
   const [lastScrollTop, setLastScrollTop] = useState(0)
-  // const segment: string | null = useSelectedLayoutSegment()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,11 +28,15 @@ export default function TopNavbar() {
     }
   }, [lastScrollTop])
 
+  const handleLogout = async () => {
+    await signOut() // 로그아웃 요청을 서버로 보냄
+    window.location.href = '/welcome'
+  }
+
   return (
     <div
       className={styles['nav-wrapper']}
       style={{
-        // opacity: scrolled ? 1 : 1,
         transform: hidden ? 'translateY(-100%)' : 'translateY(0)',
       }}
     >
@@ -71,13 +73,21 @@ export default function TopNavbar() {
           </ul>
           <div className={styles['user-section']}>
             <ul className={styles['user-ul']}>
-              <Link href={'/account/sign-in'} scroll={false}>
-                <li className={styles['user-li']}>로그인</li>
-              </Link>
+              {isLoggedIn ? (
+                <a>
+                  <li className={styles['user-li']} onClick={handleLogout}>
+                    로그아웃
+                  </li>
+                </a>
+              ) : (
+                <Link href={'/account/sign-in'} scroll={false}>
+                  <li className={styles['user-li']}>로그인</li>
+                </Link>
+              )}
             </ul>
             <ul className={styles['user-ul']}>
               <Link href={'/account/sign-in'} scroll={false}>
-                <li className={styles['nav-li']}>서비스 안내</li>
+                <li className={styles['user-li']}>서비스 안내</li>
               </Link>
             </ul>
           </div>
