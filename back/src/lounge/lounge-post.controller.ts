@@ -13,7 +13,7 @@ import { LoungePostService } from './lounge-post.service';
 import { CreateLoungePostDto } from './dto/create-lounge-post.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 
-@Controller('lounge-post')
+@Controller('lounge/posts')
 export class LoungePostController {
   constructor(private readonly loungePostService: LoungePostService) {}
 
