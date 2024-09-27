@@ -4,7 +4,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import styles from './top-navbar.module.scss'
 import logo from '../../../public/assets/logo.png'
-import signOut from '@/features/account/libs/sign-out.action'
+import signOut from '@/features/account/libs/sign-out-action'
 export default function TopNavbar({ isLoggedIn }: { isLoggedIn: boolean }) {
   const [hidden, setHidden] = useState(false)
   const [lastScrollTop, setLastScrollTop] = useState(0)
