@@ -2,7 +2,6 @@
 @use '@/common/styles/variables' as variables;
 
 .hot-article-section {
-  @include mixins.flex(center, center);
   margin-top: 50px;
   width: 980px;
   padding: 32px;
@@ -10,82 +9,119 @@
   flex-direction: column;
   border-radius: 10px;
   border: 1px solid var(--border);
-  border-radius: 10px;
-  margin-bottom: 100px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
 }
 
 .hot-topic-title {
-  position: relative;
-  right: 380px;
-  font-size: variables.$base + 12px;
+  font-size: 26px;
   font-weight: variables.$fw-bold;
   color: var(--text-color);
   margin-bottom: 5px;
-  letter-spacing: -0.2px;
+  text-align: left;
+  width: 100%;
 }
 
 .subtitle {
-  position: relative;
-  right: 380px;
   font-size: 16px;
   font-weight: variables.$fw-bold;
+  color: var(--text-color);
   margin-bottom: 40px;
-  letter-spacing: -0.2px;
+  text-align: left;
+  width: 100%;
 }
 
 .article-list {
-  @include mixins.flex(center, center);
-  flex-direction: column;
   list-style: none;
   padding: 0;
   margin: 0;
-  width: 900px;
+  width: 100%;
 }
 
 .article-item {
-  margin-bottom: 16px;
-  padding: 12px;
-  width: 100%;
+  display: flex;
+  font-size: 16px;
+  font-weight: variables.$fw-medium;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 10px;
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 5px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.1s ease;
   cursor: pointer;
+
   &:hover {
-    background: #8a8a8a2d;
+    background: #f1f1f1;
   }
 }
 
 .article {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.title {
+  display: flex;
+  align-items: center;
 }
 
 .article-header {
   display: flex;
-  justify-content: space-between;
-  font-size: 14px;
+  align-items: center;
+  font-size: 16px;
   color: var(--text-color);
-}
 
-.title {
-  font-size: 18px;
-  font-weight: bold;
-  color: var(--text-color);
-  margin: 8px 0;
+  .category {
+    border-radius: 8px;
+    border: 2px solid var(--main-alpha);
+    padding: 3px 5px;
+    margin-right: 10px;
+    font-size: 14px;
+    font-weight: variables.$fw-regular;
+    color: var(--text-color);
+  }
+
+  .image-indicator {
+    font-size: 12px;
+    color: #888;
+  }
+
+  .image-icon {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .article-stats {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  font-weight: variables.$fw-regular;
   font-size: 14px;
-  color: #888;
-}
+  color: var(--strong-border);
 
-.category,
-.image-indicator,
-.likes,
-.comments,
-.views {
-  margin-right: 8px;
+  .icon {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+
+    svg {
+      margin-right: 4px;
+    }
+  }
+
+  .like-icon {
+    color: #00b3ff;
+  }
+
+  .comment-icon {
+    color: #ff6b00;
+  }
 }
+// .likes,
+// .comments,
+// .views {
+// }

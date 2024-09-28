@@ -1,5 +1,8 @@
 import React from 'react'
 import styles from './hot-article-section.module.scss'
+import { AiOutlineLike, AiOutlineComment, AiFillPicture } from 'react-icons/ai' // 아이콘 추가
+import Image from 'next/image'
+import ImageIcon from '../../../../public/assets/picture-icon.svg'
 
 interface Article {
   category: string
@@ -99,18 +102,39 @@ export default function HotArticleSection() {
               <div className={styles['article-header']}>
                 <span className={styles['category']}>{article.category}</span>
                 <span className={styles['image-indicator']}>
-                  {article.hasImage ? '이미지 있음' : '이미지 없음'}
+                  <Image
+                    src={ImageIcon}
+                    alt="이미지 아이콘"
+                    className={styles['image-icon']}
+                    style={{
+                      fill: article.hasImage ? '#00B3FF' : '#CCCCCC',
+                      filter: article.hasImage
+                        ? 'invert(60%) sepia(181%) saturate(490%) hue-rotate(179deg) brightness(99%) contrast(102%)'
+                        : 'invert(80%) sepia(181%) saturate(490%) hue-rotate(179deg) brightness(99%) contrast(102%)',
+                      marginRight: '8px',
+                    }}
+                  />
                 </span>
               </div>
               <h3 id={`article-title-${index}`} className={styles['title']}>
                 {article.title}
               </h3>
               <div className={styles['article-stats']}>
-                <span className={styles['likes']}>추천수: {article.likes}</span>
-                <span className={styles['comments']}>
-                  댓글수: {article.comments}
-                </span>
-                <span className={styles['views']}>조회수: {article.views}</span>
+                <div className={styles['icon']}>
+                  <AiOutlineLike
+                    className={styles['like-icon']}
+                    style={{ strokeWidth: 6, fontSize: '18px' }}
+                  />
+                  <span className={styles['likes']}>{article.likes}</span>
+                </div>
+                <div className={styles['icon']}>
+                  <AiOutlineComment
+                    className={styles['comment-icon']}
+                    style={{ strokeWidth: 6, fontSize: '18px' }}
+                  />
+                  <span className={styles['comments']}>{article.comments}</span>
+                </div>
+                <span className={styles['views']}>조회수 {article.views}</span>
               </div>
             </article>
           </li>
