@@ -10,6 +10,9 @@
   border: 1px solid var(--border);
   margin-bottom: 50px;
   position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   .board-header {
     background: linear-gradient(90deg, #00b3ff -43.33%, #0066ff 131.75%);
@@ -29,31 +32,47 @@
       font-size: 16px;
       color: var(--text-color);
       cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
     }
+  }
+
+  .article {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .article-list {
     list-style: none;
     padding: 20px;
     margin: 0;
+    a {
+      display: flex;
+      color: inherit;
+      text-decoration: none;
+    }
   }
 
   .article-item {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
     padding: 12px 0;
+
     cursor: pointer;
     border-bottom: 1px solid #e0e6eb;
     transition: background-color 0.1s ease;
-    &:hover {
-      background: #f1f1f1;
-    }
 
+    &:hover {
+      background: #f1f1f17f;
+    }
     .article-text {
       display: flex;
       align-items: center;
-      color: #000000;
 
       .image-icon {
         width: 18px;
@@ -63,15 +82,13 @@
       .article-title {
         font-size: 16px;
         font-weight: variables.$fw-medium;
-        color: #000000;
       }
     }
 
     .article-info {
       display: flex;
-      align-items: center;
       font-size: 14px;
-      color: var(--strong-border);
+      color: var(--text-color);
 
       .icon {
         display: flex;

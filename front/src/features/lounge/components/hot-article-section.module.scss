@@ -36,10 +36,17 @@
   padding: 0;
   margin: 0;
   width: 100%;
+  a {
+    color: inherit;
+    display: flex;
+    text-decoration: none;
+  }
 }
 
 .article-item {
-  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 16px;
   font-weight: variables.$fw-medium;
   justify-content: space-between;
@@ -53,7 +60,7 @@
   cursor: pointer;
 
   &:hover {
-    background: #f1f1f1;
+    background: #f1f1f17f;
   }
 }
 
@@ -101,7 +108,7 @@
   align-items: center;
   font-weight: variables.$fw-regular;
   font-size: 14px;
-  color: var(--strong-border);
+  color: var(--text-color);
 
   .icon {
     display: flex;
